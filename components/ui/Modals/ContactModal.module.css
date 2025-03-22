@@ -1,0 +1,242 @@
+/* ContactModal.module.css */
+
+/* Base modal styles */
+.contactModal {
+  width: 800px;
+  max-width: 90vw;
+}
+
+.contactModal :global(.ant-modal-content) {
+  overflow: hidden;
+  border-radius: 12px;
+  padding: 0;
+  background-color: var(--bg-color) !important; /* Use theme variables */
+}
+
+.contactModal :global(.ant-modal-body) {
+  padding: 0;
+}
+
+.modalCloseIcon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--text-color);
+  z-index: 10;
+  cursor: pointer;
+  border-radius: 50%;
+  background: transparent;
+  transition: background-color 0.2s ease;
+}
+
+.modalCloseIcon:hover {
+  background-color: var(--bg-color-secondary);
+}
+
+/* Override Ant Design's default close button hover behavior */
+.contactModal :global(.ant-modal-close) {
+  color: var(--text-color);
+}
+
+.contactModal :global(.ant-modal-close:hover) {
+  background: transparent;
+}
+
+.contactModalContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Left side - Contact Information - Always green regardless of theme */
+.contactInfoSection {
+  flex: 0 0 40%;
+  position: relative;
+  background: linear-gradient(135deg, #39b487, #43c394);
+  color: white;
+  overflow: hidden;
+}
+
+.contactInfoSection::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.contactInfoContent {
+  position: relative;
+  z-index: 2;
+  padding: 60px 30px 40px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.contactInfoTitle {
+  color: white !important;
+  margin-bottom: 16px !important;
+}
+
+.contactInfoDescription {
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin-bottom: 40px !important;
+  font-size: 1.1rem !important;
+}
+
+.contactDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: auto;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.contactIcon {
+  font-size: 1.2rem;
+  margin-top: 2px;
+}
+
+.contactLabel {
+  display: block;
+  margin-bottom: 4px;
+  color: white !important;
+}
+
+.contactText {
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Right side - Contact Form - Theme-aware styling */
+.contactFormSection {
+  flex: 0 0 60%;
+  background: var(--bg-color); /* Use theme variable */
+  padding: 40px;
+}
+
+.contactFormTitle {
+  color: var(--text-color) !important;
+  margin-bottom: 24px !important;
+}
+
+.contactForm :global(.ant-form-item) {
+  margin-bottom: 20px;
+}
+
+.contactForm :global(.ant-form-item-label) label {
+  font-weight: 500;
+  color: var(--text-color) !important;
+}
+
+.contactForm :global(.ant-input),
+.contactForm :global(.ant-input-textarea) {
+  border-radius: 8px;
+  border: 1px solid var(--border-color) !important;
+  padding: 12px;
+  background-color: var(--bg-color-secondary) !important; 
+  color: var(--text-color) !important;
+}
+
+.contactForm :global(.ant-input:focus),
+.contactForm :global(.ant-input-textarea:focus) {
+  border-color: #39b487 !important;
+  box-shadow: 0 0 0 2px rgba(57, 180, 135, 0.1) !important;
+}
+
+.contactForm :global(.ant-input::placeholder),
+.contactForm :global(.ant-input-textarea::placeholder) {
+  color: var(--text-color-tertiary) !important;
+}
+
+.formActions {
+  margin-bottom: 0 !important;
+  margin-top: 20px;
+}
+
+.submitButton {
+  background: #39b487 !important;
+  border: none !important;
+  padding: 0 24px;
+  height: 45px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+  color: white !important;
+}
+
+.submitButton:hover,
+.submitButton:focus {
+  background: #43c394 !important;
+  color: white !important;
+}
+
+/* Message error styling */
+.contactForm :global(.ant-form-item-explain-error) {
+  color: var(--error-color) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .contactModalContainer {
+    flex-direction: column;
+  }
+  
+  .contactInfoSection,
+  .contactFormSection {
+    flex: 0 0 100%;
+  }
+  
+  .contactInfoContent {
+    padding: 40px 24px;
+  }
+  
+  .contactFormSection {
+    padding: 30px 24px;
+  }
+  
+  .modalCloseIcon {
+    color: var(--text-color);
+  }
+
+  .modalCloseIcon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media (max-width: 576px) {
+  .contactModal {
+    max-width: 100%;
+    margin: 0 16px;
+  }
+  
+  .contactInfoContent {
+    padding: 30px 20px;
+  }
+  
+  .contactFormSection {
+    padding: 24px 20px;
+  }
+}

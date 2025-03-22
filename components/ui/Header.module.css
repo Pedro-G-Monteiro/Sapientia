@@ -1,0 +1,104 @@
+.header {
+  background-color: var(--bg-color) !important;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 16px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  line-height: 64px;
+  height: 64px;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+}
+
+.menuButton {
+  margin-right: 16px;
+  color: var(--text-color);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logoImage {
+  height: 36px;
+  max-width: 160px;
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.userInfo:hover {
+  background-color: var(--bg-color-secondary);
+}
+
+.username {
+  margin-right: 8px;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.avatarButton {
+  margin-left: 8px;
+}
+
+.authButtons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.loginButton {
+  color: var(--primary-color);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .username {
+    display: none;
+  }
+
+  .logoText {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0 8px;
+  }
+
+  .menuButton {
+    margin-right: 8px;
+  }
+}

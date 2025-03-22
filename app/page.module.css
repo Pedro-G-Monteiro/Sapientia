@@ -1,168 +1,267 @@
-.page {
-  --gray-rgb: 0, 0, 0;
-  --gray-alpha-200: rgba(var(--gray-rgb), 0.08);
-  --gray-alpha-100: rgba(var(--gray-rgb), 0.05);
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-
-  display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
-  min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
-  font-family: var(--font-geist-sans);
-}
-
-@media (prefers-color-scheme: dark) {
-  .page {
-    --gray-rgb: 255, 255, 255;
-    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
-    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-  }
-}
-
 .main {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
+  background-color: var(--bg-color);
+  padding: 16px;
 }
 
-.main ol {
-  font-family: var(--font-geist-mono);
-  padding-left: 0;
-  margin: 0;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: -0.01em;
-  list-style-position: inside;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 16px;
 }
 
-.main li:not(:last-of-type) {
-  margin-bottom: 8px;
+.title {
+  color: var(--primary-color) !important;
+  margin: 0 !important;
 }
 
-.main code {
-  font-family: inherit;
-  background: var(--gray-alpha-100);
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-weight: 600;
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.ctas {
+.card {
+  width: 100%;
+  background-color: var(--bg-color) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: 0 4px 12px var(--shadow-color) !important;
+  margin-bottom: 20px;
+}
+
+.demoCard {
+  height: 100%;
+  background-color: var(--bg-color) !important;
+  border-color: var(--border-color) !important;
+  transition: all 0.3s ease;
+}
+
+.demoCard:hover {
+  box-shadow: 0 4px 12px var(--shadow-color) !important;
+}
+
+/* Estilos para cards com hover */
+.demoCard.ant-card-hoverable:hover {
+  border-color: var(--primary-color) !important;
+}
+
+.colorPalette {
   display: flex;
   gap: 16px;
+  flex-wrap: wrap;
+  margin: 24px 0;
 }
 
-.ctas a {
-  appearance: none;
-  border-radius: 128px;
-  height: 48px;
-  padding: 0 20px;
-  border: none;
-  border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
-  cursor: pointer;
+.colorItem {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 500;
-}
-
-a.primary {
-  background: var(--foreground);
-  color: var(--background);
-  gap: 8px;
-}
-
-a.secondary {
-  border-color: var(--gray-alpha-200);
-  min-width: 158px;
-}
-
-.footer {
-  grid-row-start: 3;
-  display: flex;
-  gap: 24px;
-}
-
-.footer a {
-  display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 8px;
 }
 
-.footer img {
-  flex-shrink: 0;
+.colorSwatch {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-
-  .footer a:hover {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
+.buttonGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
 }
 
-@media (max-width: 600px) {
-  .page {
-    padding: 32px;
-    padding-bottom: 80px;
-  }
+/* Estilos para o Tabs dentro de cards */
+.demoCard :global(.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn) {
+  color: var(--primary-color) !important;
+}
 
-  .main {
-    align-items: center;
-  }
+.demoCard :global(.ant-tabs-ink-bar) {
+  background-color: var(--primary-color) !important;
+}
 
-  .main ol {
-    text-align: center;
-  }
+/* Estilos para as estatísticas */
+.demoCard :global(.ant-statistic-title) {
+  color: var(--text-color-secondary) !important;
+}
 
-  .ctas {
+/* Estilos para cards com meta */
+.demoCard :global(.ant-card-meta-title) {
+  color: var(--text-color) !important;
+}
+
+.demoCard :global(.ant-card-meta-description) {
+  color: var(--text-color-secondary) !important;
+}
+
+/* Estilos para os ícones de ação */
+.demoCard :global(.ant-card-actions) {
+  background-color: var(--bg-color-secondary) !important;
+  border-top-color: var(--border-color) !important;
+}
+
+.demoCard :global(.ant-card-actions > li > span) {
+  color: var(--text-color-secondary) !important;
+}
+
+.demoCard :global(.ant-card-actions > li > span:hover) {
+  color: var(--primary-color) !important;
+}
+
+/* Estilos para os formulários */
+.demoCard :global(.ant-form-item-label > label) {
+  color: var(--text-color) !important;
+}
+
+.demoCard :global(.ant-form-item-explain-error) {
+  color: var(--error-color) !important;
+}
+
+.demoCard :global(.ant-input) {
+  background-color: var(--bg-color) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+.demoCard :global(.ant-input:hover) {
+  border-color: var(--primary-color-light) !important;
+}
+
+.demoCard :global(.ant-input:focus),
+.demoCard :global(.ant-input-focused) {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(58, 156, 116, 0.2) !important;
+}
+
+.demoCard :global(.ant-input-affix-wrapper) {
+  background-color: var(--bg-color) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+.demoCard :global(.ant-input-affix-wrapper:hover) {
+  border-color: var(--primary-color-light) !important;
+}
+
+.demoCard :global(.ant-input-affix-wrapper:focus),
+.demoCard :global(.ant-input-affix-wrapper-focused) {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(58, 156, 116, 0.2) !important;
+}
+
+.demoCard :global(.ant-checkbox-checked .ant-checkbox-inner) {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+
+.demoCard :global(.ant-radio-checked .ant-radio-inner) {
+  border-color: var(--primary-color) !important;
+}
+
+.demoCard :global(.ant-radio-inner::after) {
+  background-color: var(--primary-color) !important;
+}
+
+.demoCard :global(.ant-slider-track) {
+  background-color: var(--primary-color) !important;
+}
+
+.demoCard :global(.ant-slider-handle::after) {
+  box-shadow: 0 0 0 2px var(--primary-color) !important;
+}
+
+.demoCard :global(.ant-select:not(.ant-select-disabled):hover .ant-select-selector) {
+  border-color: var(--primary-color-light) !important;
+}
+
+.demoCard :global(.ant-select-focused:not(.ant-select-disabled) .ant-select-selector) {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(58, 156, 116, 0.2) !important;
+}
+
+.demoCard :global(.ant-select-dropdown) {
+  background-color: var(--bg-color) !important;
+}
+
+.demoCard :global(.ant-select-item-option-selected:not(.ant-select-item-option-disabled)) {
+  background-color: rgba(58, 156, 116, 0.1) !important;
+  color: var(--primary-color) !important;
+}
+
+/* Estilos para listas */
+.demoCard :global(.ant-list-bordered) {
+  border-color: var(--border-color) !important;
+}
+
+.demoCard :global(.ant-list-item) {
+  border-color: var(--border-color) !important;
+  color: var(--text-color) !important;
+}
+
+.demoCard :global(.ant-list-item-meta-title) {
+  color: var(--text-color) !important;
+}
+
+.demoCard :global(.ant-list-item-meta-title > a) {
+  color: var(--primary-color) !important;
+}
+
+.demoCard :global(.ant-list-item-meta-description) {
+  color: var(--text-color-secondary) !important;
+}
+
+.demoCard :global(.ant-pagination-item-active) {
+  border-color: var(--primary-color) !important;
+}
+
+.demoCard :global(.ant-pagination-item-active a) {
+  color: var(--primary-color) !important;
+}
+
+.demoCard :global(.ant-list-pagination) {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.virtualListContainer {
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.virtualListContainer :global(.ant-list-item) {
+  padding: 12px 24px;
+}
+
+.virtualListContainer :global(.ant-avatar) {
+  background-color: var(--primary-color);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .buttonGroup {
     flex-direction: column;
+    align-items: stretch;
   }
-
-  .ctas a {
-    font-size: 14px;
-    height: 40px;
-    padding: 0 16px;
+  
+  .colorSwatch {
+    width: 60px;
+    height: 60px;
   }
-
-  a.secondary {
-    min-width: auto;
-  }
-
-  .footer {
-    flex-wrap: wrap;
-    align-items: center;
+  
+  .colorPalette {
     justify-content: center;
   }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
+  
+  .content {
+    padding: 0;
   }
 }

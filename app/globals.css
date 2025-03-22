@@ -1,27 +1,42 @@
+/* Variáveis iniciais para evitar flash de conteúdo não estilizado */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary-color: #3a9c74;
+  --primary-color-light: #4fb58c;
+  --primary-color-dark: #2b8361;
+  --secondary-color: #3e73cc;
+  --secondary-color-light: #5c8edd;
+  --secondary-color-dark: #2d5daf;
+  --success-color: #52c41a;
+  --warning-color: #faad14;
+  --error-color: #ff4d4f;
+  --text-color: #262626;
+  --text-color-secondary: #595959;
+  --text-color-tertiary: #8c8c8c;
+  --bg-color: #ffffff;
+  --bg-color-secondary: #f5f5f5;
+  --border-color: #f0f0f0;
+  --border-color-dark: #d9d9d9;
+  --shadow-color: rgba(0, 0, 0, 0.05);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.dark {
+  --primary-color: #4fb58c;
+  --primary-color-light: #3a9c74;
+  --primary-color-dark: #2b8361;
+  --secondary-color: #5c8edd;
+  --secondary-color-light: #3e73cc;
+  --secondary-color-dark: #2d5daf;
+  --success-color: #73d13d;
+  --warning-color: #ffc53d;
+  --error-color: #ff7875;
+  --text-color: #f5f5f5;
+  --text-color-secondary: #f0f0f0;
+  --text-color-tertiary: #d9d9d9;
+  --bg-color: #262626;
+  --bg-color-secondary: #434343;
+  --border-color: #595959;
+  --border-color-dark: #8c8c8c;
+  --shadow-color: rgba(0, 0, 0, 0.2);
 }
 
 * {
@@ -30,13 +45,86 @@ body {
   margin: 0;
 }
 
+body {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+
 a {
-  color: inherit;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* Para prevenir flash de conteúdo não estilizado durante carregamento */
+html.dark body {
+  background-color: #262626;
+  color: #f5f5f5;
+}
+
+/* Estilos de transição para troca de temas */
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Scrollbar customizada */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color-secondary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color-dark);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
+}
+
+/* Estilos de ajuda para uso geral */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+
+.gap-4 {
+  gap: 16px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 12px;
   }
 }

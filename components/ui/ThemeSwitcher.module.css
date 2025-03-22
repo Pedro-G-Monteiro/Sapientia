@@ -1,0 +1,23 @@
+.themeSwitcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: color 0.3s;
+  padding: 8px;
+  border-radius: 50%;
+}
+
+.themeSwitcher:hover {
+  color: var(--primary-color);
+  background-color: var(--bg-color-secondary);
+}
+
+/* Adiciona um pequeno efeito ao clicar */
+.themeSwitcher:active {
+  transform: scale(0.95);
+}

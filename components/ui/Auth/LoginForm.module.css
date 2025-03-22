@@ -1,0 +1,211 @@
+.loginCard {
+  width: 100%;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.loginCard:hover {
+  box-shadow: 0 15px 40px var(--shadow-color);
+  transform: translateY(-5px);
+}
+
+.cardHeader {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.cardTitle {
+  margin-bottom: 8px !important;
+  color: var(--text-color) !important;
+  font-weight: 600 !important;
+}
+
+.cardSubtitle {
+  color: var(--text-color-secondary) !important;
+  font-size: 1rem !important;
+  margin-bottom: 0 !important;
+}
+
+.loginForm {
+  margin-top: 24px;
+}
+
+.inputIcon {
+  color: var(--text-color-tertiary);
+}
+
+.formInput {
+  height: 44px;
+  border-radius: 8px;
+  border-color: var(--border-color);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.formInput:hover,
+.formInput:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(58, 156, 156, 0.1);
+}
+
+.formActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.forgotPassword {
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+  font-size: 14px;
+}
+
+.forgotPassword:hover {
+  color: var(--primary-color-light);
+}
+
+.submitButton {
+  height: 44px;
+  border-radius: 8px;
+  font-weight: 500;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.submitButton:hover,
+.submitButton:focus {
+  background-color: var(--primary-color-light);
+  border-color: var(--primary-color-light);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(58, 156, 156, 0.2);
+}
+
+.divider {
+  margin: 28px 0 !important;
+  color: var(--text-color-tertiary) !important;
+}
+
+.divider::before,
+.divider::after {
+  border-color: var(--border-color) !important;
+}
+
+.socialLogin {
+  margin-bottom: 24px;
+}
+
+.socialButtons {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 16px;
+}
+
+.googleButton,
+.githubButton {
+  height: 44px;
+  border-radius: 8px;
+  flex: 1;
+  max-width: 160px;
+  transition: all 0.3s ease;
+}
+
+.googleButton {
+  color: #4285F4;
+  border-color: #4285F4;
+}
+
+.googleButton:hover {
+  background-color: rgba(66, 133, 244, 0.05);
+  transform: translateY(-2px);
+}
+
+.githubButton {
+  color: var(--text-color);
+  border-color: var(--text-color);
+}
+
+.githubButton:hover {
+  background-color: rgba(38, 38, 38, 0.05);
+  transform: translateY(-2px);
+}
+
+.signupSection {
+  text-align: center;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.signupText {
+  margin-right: 8px;
+  color: var(--text-color-secondary);
+}
+
+.signupLink {
+  color: var(--primary-color);
+  font-weight: 500;
+  padding: 0;
+  height: auto;
+}
+
+.signupLink:hover {
+  color: var(--primary-color-light);
+}
+
+/* Demo credentials section */
+.demoCredentials {
+  margin-top: 24px;
+  padding: 12px;
+  background-color: var(--bg-color-secondary);
+  border-radius: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.demoTitle {
+  font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 5px;
+}
+
+.demoText {
+  color: var(--text-color-secondary);
+  font-size: 14px;
+}
+
+.dark {
+  --text-color-rgb: 245, 245, 245; /* #f5f5f5 in dark mode */
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .socialButtons {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .googleButton,
+  .githubButton {
+    max-width: 100%;
+  }
+  
+  .formActions {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  
+  .forgotPassword {
+    align-self: flex-end;
+  }
+}
