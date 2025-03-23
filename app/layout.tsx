@@ -14,8 +14,8 @@ const inter = Inter({
 
 // Metadados da aplicação
 export const metadata: Metadata = {
-  title: 'Plataforma Educacional',
-  description: 'Sistema de aprendizado e gestão de conhecimento',
+  title: 'Sapientia',
+  description: 'Expand your knowledge with Sapientia',
 };
 
 export default function RootLayout({
@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang="en-ES" suppressHydrationWarning>
       <body className={`${inter.className}`}>
         <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
           <ThemeProvider>

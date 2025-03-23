@@ -345,7 +345,16 @@
 
 .mobileMenuButton:hover {
   color: var(--primary-color);
-  transform: rotate(90deg);
+}
+
+.closeIcon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.closeIcon:hover {
+  color: var(--primary-color);
 }
 
 .mobileMenuToggle {

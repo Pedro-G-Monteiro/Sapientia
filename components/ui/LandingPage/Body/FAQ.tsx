@@ -147,7 +147,7 @@ const FAQ: React.FC = () => {
         
         <div className={styles.moreFaqContainer}>
           <Paragraph className={styles.moreFaqText}>
-            Didn't find what you were looking for? Contact our team.
+            Didn&apos;t find what you were looking for? Contact our team.
           </Paragraph>
           <Button 
             type="primary" 

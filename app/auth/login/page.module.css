@@ -1,0 +1,278 @@
+.loginPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  padding: 2rem 1rem;
+}
+
+/* Split screen layout */
+.splitScreen {
+  display: flex;
+  min-height: 90vh;
+  width: 90%;
+  max-width: 1200px;
+  background-color: var(--bg-color);
+  border-radius: 20px;
+  box-shadow: 0 10px 20px 2px var(--shadow-color);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Left panel with animation */
+.informationPanel {
+  flex: 1;
+  background: #093028; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #237a57,
+    #093028
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #237a57,
+    #093028
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.informationPanel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 70% 30%,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+}
+
+.welcomeMessage {
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.welcomeTitle {
+  font-weight: 500 !important;
+  color: white !important;
+  margin-bottom: 2rem !important;
+}
+
+.welcomeSubtitle {
+  color: #fefefe !important;
+  font-size: 1rem !important;
+}
+
+.informationContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 80%;
+  z-index: 1;
+  height: 100%;
+}
+
+.quoteContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  min-height: 250px;
+}
+
+.quoteSymbol {
+  font-size: 6rem;
+  font-family: Georgia, serif;
+  color: var(--text-color-tertiary);
+  position: absolute;
+  top: -1rem;
+  left: 1rem;
+  line-height: 1;
+}
+
+.quoteSymbol2 {
+  font-size: 6rem;
+  font-family: Georgia, serif;
+  color: var(--text-color-tertiary);
+  position: absolute;
+  bottom: 3rem;
+  right: 0;
+  line-height: 1;
+}
+
+.quoteText {
+  color: #fefefe !important;
+  font-size: 1.5rem !important;
+  max-width: 90%;
+  margin: 0 auto !important;
+  line-height: 1.6 !important;
+  font-weight: 400 !important;
+  margin-bottom: 1.5rem !important;
+  font-style: italic;
+  text-align: center;
+  z-index: 1;
+}
+
+.quoteAuthor {
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 1.25rem !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px !important;
+  z-index: 1;
+  text-align: end;
+}
+
+.fadeTransition {
+  animation: fadeInOut 5s infinite;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Right panel with login form */
+.loginPanel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  background-color: var(--bg-color-secondary);
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.loginContainer {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .splitScreen {
+    width: 95%;
+  }
+
+  .informationTitle {
+    font-size: 2.25rem !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .splitScreen {
+    flex-direction: column;
+    max-height: none;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .informationPanel,
+  .loginPanel {
+    flex: none;
+    width: 100%;
+  }
+
+  .informationPanel {
+    display: none;
+  }
+
+  .loginPanel {
+    padding: 3rem 2rem;
+    border-radius: 0 0 20px 20px;
+  }
+
+  .quoteContainer {
+    min-height: 200px;
+    padding: 1.5rem;
+  }
+
+  .quoteText {
+    font-size: 1.25rem !important;
+  }
+
+  .quoteAuthor {
+    font-size: 1.1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .informationPanel {
+    padding: 2.5rem 1.5rem;
+    min-height: 250px;
+  }
+
+  .loginPanel {
+    padding: 2rem 1.5rem;
+  }
+
+  .informationTitle {
+    font-size: 1.25rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .informationDescription {
+    font-size: 1.1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .informationText {
+    min-height: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* For users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .splitScreen {
+    animation: none;
+  }
+
+  .fadeTransition {
+    animation: none;
+  }
+}

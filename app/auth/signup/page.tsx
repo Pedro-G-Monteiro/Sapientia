@@ -5,7 +5,8 @@ import { Button, Checkbox, Form, Input, message } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import styles from '../login/login.module.css';
+import styles from '../login/page.module.css';
+import Image from 'next/image';
 
 interface SignupFormValues {
   name: string;
@@ -58,7 +59,9 @@ const PerfectSignup = () => {
             </div>
             
             <div className={styles.imageContainer}>
-              <img 
+              <Image
+                width={500}
+                height={500}
                 src="/images/signup-illustration.svg" 
                 alt="Community illustration" 
                 className={styles.loginImage}

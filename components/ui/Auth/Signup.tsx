@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styles from './Auth.module.css';
+import Image from 'next/image';
 
 const { Title, Text } = Typography;
 
@@ -181,7 +182,8 @@ const Signup: React.FC<SignupProps> = ({ onSuccess }) => {
           <div className={styles.authImageWrapper}>
             <div className={styles.authImage}>
               <div className={styles.imageShadow}></div>
-              <img 
+              <Image
+                layout="fill" 
                 src="/images/signup-image.jpg" 
                 alt="Join our knowledge community" 
                 className={styles.actualImage}

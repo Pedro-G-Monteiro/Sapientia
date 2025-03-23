@@ -86,10 +86,10 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
         <div className={styles.contactInfoSection}>
           <div className={styles.contactInfoContent}>
             <Title level={3} className={styles.contactInfoTitle}>
-              Let's Connect
+              Let&apos;s Connect
             </Title>
             <Paragraph className={styles.contactInfoDescription}>
-              We're here to help with any questions you might have about our platform.
+              We&apos;re here to help with any questions you might have about our platform.
             </Paragraph>
             
             <div className={styles.contactDetails}>

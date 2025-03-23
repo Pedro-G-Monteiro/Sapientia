@@ -5,6 +5,7 @@ import { Badge, Button, Layout, Menu } from 'antd';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import styles from './LandingHeader.module.css';
+import { useRouter } from 'next/navigation';
 
 const { Header } = Layout;
 
@@ -16,6 +17,7 @@ interface MenuItem {
 }
 
 const LandingHeader: React.FC = () => {
+  const router = useRouter();
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>('');
@@ -165,7 +167,7 @@ const LandingHeader: React.FC = () => {
       label: (
         <Button
           type="primary" 
-          onClick={() => scrollToSection('#top')}
+          onClick={() => router.push('/auth/signup')}
           className={styles.mobileGetStartedButton}
           aria-label="Get Started"
         >
@@ -217,7 +219,7 @@ const LandingHeader: React.FC = () => {
             {/* Independent Get Started Button - only visible on desktop */}
             <Button
               type="primary" 
-              onClick={() => scrollToSection('#top')}
+              onClick={() => router.push('/auth/signup')}
               className={styles.getStartedButton}
               aria-label="Get Started"
             >
@@ -233,13 +235,18 @@ const LandingHeader: React.FC = () => {
                   aria-expanded={mobileMenuOpen}
                   aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                 >
-                  <MenuOutlined />
+                  {
+                    mobileMenuOpen
+                      ? <span className={styles.closeIcon}>&times;</span>
+                      : <MenuOutlined />
+                  }
                 </button>
               </Badge>
             </div>
           </div>
         </div>
-        
+      </Header>
+      
         {/* Mobile menu */}
         <div 
           className={`${styles.mobileMenu} ${mobileMenuOpen ? styles.mobileMenuOpen : ''}`}
@@ -257,8 +264,7 @@ const LandingHeader: React.FC = () => {
             onClick={() => setMobileMenuOpen(false)}
           />
         </div>
-      </Header>
-      
+
       {/* Overlay for mobile menu */}
       {mobileMenuOpen && (
         <div 
