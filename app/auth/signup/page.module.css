@@ -1,0 +1,292 @@
+.signupPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  padding: 1rem;
+}
+
+/* Split screen layout */
+.splitScreen {
+  display: flex;
+  min-height: 90vh;
+  width: 90%;
+  max-width: 1200px;
+  background-color: var(--bg-color);
+  border-radius: 20px;
+  box-shadow: 0 10px 20px 2px var(--shadow-color);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Left panel with animation */
+.informationPanel {
+  flex: 1;
+  background: var(--primary-color-darker);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.informationPanel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 70% 30%,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
+}
+
+.welcomeMessage {
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  z-index: 1;
+}
+
+.welcomeTitle {
+  font-weight: 500 !important;
+  color: white !important;
+  margin-bottom: 2rem !important;
+}
+
+.welcomeSubtitle {
+  color: #fefefe !important;
+  font-size: 1rem !important;
+}
+
+/* Right panel with signup form */
+.signupPanel {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: var(--bg-color-secondary);
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.signupContainer {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* Custom styles for signup page */
+.signupInfoPanel {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.benefitsContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0 1rem;
+  width: 100%;
+  max-width: 90%;
+}
+
+.benefitItem {
+  display: flex;
+  align-items: flex-start;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  animation: slideIn 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.benefitItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.benefitItem:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.benefitItem:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.benefitItem:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.benefitItem:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.benefitNumber {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-color-light);
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin-right: 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.benefitContent {
+  flex: 1;
+}
+
+.benefitTitle {
+  color: white !important;
+  margin-bottom: 0.5rem !important;
+  font-weight: 600 !important;
+}
+
+.benefitDescription {
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin-bottom: 0 !important;
+  font-size: 0.95rem !important;
+}
+
+/* Enhanced focus states for keyboard navigation - properly scoped to a class */
+.focusVisible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+  transition: outline-offset 0.1s ease;
+}
+
+/* Instead of using :focus-visible directly, apply the focusVisible class 
+   to elements that need enhanced focus styles in JS */
+
+.skipLink:focus,
+.benefitItem:focus,
+.signupPanel a:focus,
+.signupPanel button:focus {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+  .splitScreen {
+    width: 95%;
+  }
+}
+
+@media (max-width: 992px) {
+  .splitScreen {
+    flex-direction: column;
+    max-height: none;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: none;
+  }
+
+  .informationPanel,
+  .signupPanel {
+    flex: none;
+    width: 100%;
+  }
+
+  .informationPanel {
+    display: none;
+  }
+
+  .signupPanel {
+    padding: 3rem 2rem;
+    border-radius: 0 0 20px 20px;
+  }
+  
+  .benefitsContainer {
+    gap: 1rem;
+  }
+  
+  .benefitItem {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .informationPanel {
+    display: none;
+  }
+  
+  .signupPanel {
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .splitScreen {
+    animation: none;
+  }
+  
+  .benefitItem {
+    animation: none;
+    transform: none;
+    transition: none;
+  }
+  
+  .benefitItem:hover {
+    transform: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .benefitNumber {
+    border: 2px solid currentColor;
+  }
+  
+  .benefitItem {
+    border: 1px solid currentColor;
+  }
+  
+  .splitScreen {
+    border: 1px solid currentColor;
+  }
+}
