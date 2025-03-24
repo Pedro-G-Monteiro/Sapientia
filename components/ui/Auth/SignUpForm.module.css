@@ -1,0 +1,284 @@
+.signupWrapper {
+  width: 100%;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.brandName {
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+  font-style: italic;
+  color: var(--primary-color);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+}
+
+.signupForm {
+  width: 100%;
+}
+
+.formHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+}
+
+.formTitle {
+  font-size: 24px;
+  color: var(--text-color-primary);
+  margin-bottom: 0px !important;
+}
+
+.formInput {
+  height: 48px;
+  border-radius: 6px;
+  border-color: var(--border-color-dark);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.formInput:hover,
+.formInput:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 3px 8px var(--shadow-color);
+}
+
+.inputIcon {
+  color: var(--text-color-tertiary);
+  margin-right: 8px;
+}
+
+.passwordStrengthContainer {
+  margin-top: 8px;
+}
+
+.passwordStrengthText {
+  display: block;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.passwordWeak {
+  color: var(--error-color);
+  font-weight: 600;
+}
+
+.passwordMedium {
+  color: var(--warning-color);
+  font-weight: 600;
+}
+
+.passwordStrong {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.passwordStrengthTextContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.passwordInfoIcon {
+  margin-left: 8px;
+  color: var(--text-color-tertiary);
+  font-size: 14px;
+  cursor: help;
+  transition: color 0.3s ease;
+}
+
+.passwordInfoIcon:hover {
+  color: var(--primary-color);
+}
+
+.termsLink {
+  color: var(--primary-color-lighter);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.termsLink:hover, 
+.termsLink:focus {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: var(--primary-color-lighter);
+}
+
+.submitButton {
+  height: 48px;
+  border-radius: 8px;
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  font-weight: 500;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.submitButton:hover,
+.submitButton:focus {
+  background-color: var(--primary-color-light) !important;
+  border-color: var(--primary-color-light) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px var(--shadow-color);
+}
+
+.divider {
+  margin: 24px 0 !important;
+  color: var(--text-color-tertiary) !important;
+}
+
+.divider::before,
+.divider::after {
+  border-color: var(--border-color) !important;
+}
+
+.googleButton {
+  height: 48px;
+  border-radius: 8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  border-color: var(--border-color-dark);
+  transition: all 0.3s ease;
+}
+
+.googleButton:hover,
+.googleButton:focus {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background-color: var(--primary-color-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.loginSection {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-color-secondary);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.loginText {
+  margin-right: 8px;
+}
+
+.loginLink {
+  color: var(--primary-color-lighter);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.loginLink::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.loginLink:hover::after,
+.loginLink:focus::after {
+  width: 100%;
+}
+
+/* Error message styling */
+.errorMessage {
+  color: var(--error-color);
+  font-size: 14px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+/* Enhanced focus styles - properly scoped to classes */
+.focusOutline {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.formInput:focus-within,
+.termsLink:focus,
+.submitButton:focus,
+.googleButton:focus,
+.loginLink:focus,
+.skipLink:focus {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+@media (max-width: 992px) {
+  .formHeader {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .submitButton, 
+  .googleButton {
+    height: 44px;
+    border-radius: 6px;
+  }
+  
+  .formInput {
+    height: 44px;
+  }
+  
+  .brandName {
+    font-size: 24px;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .signupWrapper,
+  .submitButton:hover,
+  .submitButton:focus,
+  .googleButton:hover,
+  .googleButton:focus,
+  .formInput:hover,
+  .formInput:focus,
+  .loginLink::after {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (forced-colors: active) {
+  .submitButton,
+  .googleButton,
+  .termsLink,
+  .loginLink {
+    border: 2px solid currentColor;
+  }
+  
+  .passwordWeak,
+  .passwordMedium,
+  .passwordStrong {
+    border-bottom: 2px solid currentColor;
+  }
+}

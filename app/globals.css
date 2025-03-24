@@ -2,7 +2,9 @@
 :root {
   --primary-color: #3a9c74;
   --primary-color-light: #4fb58c;
+  --primary-color-lighter: #6ac5a9;
   --primary-color-dark: #2b8361;
+  --primary-color-darker: #1f6b4f;
   --secondary-color: #3e73cc;
   --secondary-color-light: #5c8edd;
   --secondary-color-dark: #2d5daf;
@@ -22,7 +24,9 @@
 .dark {
   --primary-color: #4fb58c;
   --primary-color-light: #3a9c74;
+  --primary-color-lighter: #6ac5a9;
   --primary-color-dark: #2b8361;
+  --primary-color-darker: #1f6b4f;
   --secondary-color: #5c8edd;
   --secondary-color-light: #3e73cc;
   --secondary-color-dark: #2d5daf;
