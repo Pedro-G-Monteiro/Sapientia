@@ -1,0 +1,68 @@
+.statItem {
+  text-align: center;
+  padding: 0 15px;
+  position: relative;
+}
+
+.statItem:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -12px;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.statContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconLeft {
+  flex-direction: row;
+}
+
+.iconTop {
+  flex-direction: column;
+}
+
+.iconRight {
+  flex-direction: row-reverse;
+}
+
+.statIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Espaçamento para ícones baseado na posição */
+.iconLeft .statIcon {
+  margin-right: 10px;
+}
+
+.iconRight .statIcon {
+  margin-left: 10px;
+}
+
+.iconTop .statIcon {
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+}
+
+.statValue {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

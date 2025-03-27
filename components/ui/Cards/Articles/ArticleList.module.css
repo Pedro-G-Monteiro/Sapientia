@@ -1,0 +1,19 @@
+.articleList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.loadingContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.emptyContainer {
+  width: 100%;
+  padding: 40px 0;
+}

@@ -1,0 +1,225 @@
+.header {
+  background: transparent;
+  padding: 0 24px;
+  height: 64px;
+  line-height: 64px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  position: sticky;
+  z-index: 10;
+  top: 0;
+  background-color: var(--bg-color);
+}
+
+.collapseButton {
+  height: 100%;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.siderCollapser {
+  display: none;
+}
+
+.headerButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 18px;
+}
+
+.headerAvatar {
+  margin-left: 8px;
+  cursor: pointer;
+  border: 2px solid var(--primary-color-light);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.headerAvatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.mobileMenuButton {
+  margin-right: auto;
+  font-size: 18px;
+}
+
+/* Estilos para a funcionalidade de busca */
+.searchContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  width: 350px;
+  border-radius: 20px;
+  transition: width 0.3s ease;
+  animation: slideIn 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    width: 40px;
+    opacity: 0;
+  }
+  to {
+    width: 250px;
+    opacity: 1;
+  }
+}
+
+/* Estilos para o popover de notificações */
+.notificationsContainer {
+  width: 320px;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.notificationsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.notificationsTitle {
+  font-weight: 500;
+}
+
+.notificationsList {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 300px;
+}
+
+.notificationItem {
+  display: flex;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  background-color: var(--bg-color);
+  transition: background-color 0.2s ease;
+}
+
+.notificationItem:hover {
+  background-color: var(--bg-color-secondary);
+}
+
+.notificationRead {
+  opacity: 0.7;
+}
+
+.notificationIcon {
+  margin-right: 12px;
+  font-size: 18px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.notificationContent {
+  flex: 1;
+}
+
+.notificationText {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.notificationTime {
+  font-size: 12px;
+  color: var(--text-color-tertiary);
+}
+
+.notificationDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.notificationsFooter {
+  padding: 8px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.userDropdown {
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+/* Dark mode adjustments */
+:global(.dark) .header {
+  background-color: var(--bg-color);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+:global(.dark) .notificationItem {
+  background-color: var(--bg-color-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+:global(.dark) .notificationItem:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+:global(.dark) .notificationsHeader,
+:global(.dark) .notificationsFooter {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .searchInput {
+    width: 200px;
+  }
+  
+  @keyframes slideIn {
+    from {
+      width: 40px;
+      opacity: 0;
+    }
+    to {
+      width: 200px;
+      opacity: 1;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .searchInput {
+    width: 150px;
+  }
+  
+  @keyframes slideIn {
+    from {
+      width: 40px;
+      opacity: 0;
+    }
+    to {
+      width: 150px;
+      opacity: 1;
+    }
+  }
+  
+  .notificationsContainer {
+    width: 280px;
+  }
+}

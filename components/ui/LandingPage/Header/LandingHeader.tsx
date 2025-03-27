@@ -3,9 +3,10 @@
 import { MenuOutlined, RocketOutlined } from '@ant-design/icons';
 import { Badge, Button, Layout, Menu } from 'antd';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import styles from './LandingHeader.module.css';
 import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import Logo from '../../Logo/Logo';
+import styles from './LandingHeader.module.css';
 
 const { Header } = Layout;
 
@@ -186,22 +187,7 @@ const LandingHeader: React.FC = () => {
       >
         <div className={styles.container}>
           {/* Logo */}
-          <div className={styles.logo}>
-            <Link href="/" aria-label="Sapientia - Home">
-              <div className={styles.logoWrapper}>
-                <div className={styles.logoIcon} aria-hidden="true">
-                  <div className={styles.spaceStars}>
-                    {[...Array(3)].map((_, i) => (
-                      <div key={i} className={styles.star}>●</div>
-                    ))}
-                  </div>
-                  <RocketOutlined className={styles.rocketIcon} />
-                  <div className={styles.rocketThrust}></div>
-                </div>
-                <span className={styles.logoText}>Sapientia</span>
-              </div>
-            </Link>
-          </div>
+          <Logo isLanding={true} />
           
           {/* Right side: Navigation, Get Started button, and mobile menu button */}
           <div className={styles.rightSection}>

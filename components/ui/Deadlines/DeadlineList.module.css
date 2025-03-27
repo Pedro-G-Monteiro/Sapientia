@@ -1,0 +1,25 @@
+.deadlineList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.loadingContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+  min-height: 150px;
+}
+
+.emptyContainer {
+  width: 100%;
+  padding: 30px 0;
+  text-align: center;
+  min-height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

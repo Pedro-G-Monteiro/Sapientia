@@ -1,0 +1,128 @@
+.deadlineItem {
+  padding: 16px;
+  border-radius: 12px;
+  background-color: var(--bg-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
+}
+
+.deadlineItem:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
+}
+
+.deadlineContent {
+  width: 100%;
+}
+
+.deadlineHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.titleSection {
+  flex: 1;
+  overflow: hidden;
+}
+
+.deadlineTitle {
+  margin: 0 0 4px 0 !important;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.courseTitle {
+  color: var(--text-color-secondary);
+  font-size: 0.85rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.deadlineStatus {
+  white-space: nowrap;
+  margin-left: 12px;
+}
+
+.deadlineDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.deadlineInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.deadlineDate {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-color-tertiary);
+}
+
+.priorityTag {
+  margin: 0;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  padding: 0 8px;
+  line-height: 20px;
+  height: 22px;
+}
+
+.progressBar {
+  margin-top: 8px;
+}
+
+.completedBadge {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+/* Dark mode */
+:global(.dark) .deadlineItem {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .deadlineItem {
+    transition: none;
+  }
+}
+
+/* Responsiveness */
+@media (max-width: 480px) {
+  .deadlineHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .deadlineStatus {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+  
+  .deadlineInfo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
