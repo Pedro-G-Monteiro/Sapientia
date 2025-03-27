@@ -21,7 +21,7 @@ interface AppSidebarProps {
 	setCollapsed: (collapsed: boolean) => void;
 }
 
-const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed, setCollapsed }) => {
+const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
 	const router = useRouter();
 	const pathname = usePathname();
 

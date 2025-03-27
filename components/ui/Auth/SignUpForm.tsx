@@ -19,10 +19,11 @@ import {
   Typography,
 } from 'antd';
 import Link from 'next/link';
+import type { ValidateErrorEntity } from 'rc-field-form/es/interface';
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './SignUpForm.module.css';
 
-const { Title, Text, Paragraph } = Typography;
+const { Title, Text } = Typography;
 
 interface SignUpFormProps {
 	onSignUpSuccess: () => void;
@@ -131,6 +132,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
 
 	const handleSubmit = async (values: SignUpFormValues) => {
 		setFormLoading(true);
+    console.log('Form values:', values);
     setFormErrors({});
     
 		try {
@@ -153,10 +155,10 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
 		}
 	};
 
-  const handleFormFinishFailed = ({ errorFields }: any) => {
+  const handleFormFinishFailed = ({ errorFields }: ValidateErrorEntity<SignUpFormValues>) => {
     const errors: Record<string, string> = {};
     
-    errorFields.forEach((error: any) => {
+    errorFields.forEach((error) => {
       errors[error.name[0]] = error.errors[0];
     });
     

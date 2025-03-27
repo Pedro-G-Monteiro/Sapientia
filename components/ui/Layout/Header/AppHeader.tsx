@@ -34,7 +34,7 @@ interface UserData {
 interface AppHeaderProps {
 	collapsed: boolean;
 	setCollapsed: (collapsed: boolean) => void;
-	userData: UserData;
+	userData: UserData | null;
 	mobileView: boolean;
 }
 

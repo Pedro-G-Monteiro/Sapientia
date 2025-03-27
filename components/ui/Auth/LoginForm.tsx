@@ -1,12 +1,12 @@
 'use client';
 
-import { GoogleOutlined, LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Divider, Form, Input, message, Typography, Spin } from 'antd';
+import { GoogleOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
+import { Button, Checkbox, Divider, Form, Input, message, Typography } from 'antd';
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './LoginForm.module.css';
 
-const { Title, Text, Paragraph } = Typography;
+const { Text } = Typography;
 
 interface LoginFormProps {
   onLoginSuccess: () => void;
@@ -31,24 +31,24 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
     return regex.test(email);
   };
   
-  // Password strength checker
-  const checkPasswordStrength = (password: string) => {
-    if (!password) return '';
+  // // Password strength checker
+  // const checkPasswordStrength = (password: string) => {
+  //   if (!password) return '';
     
-    const hasLowerCase = /[a-z]/.test(password);
-    const hasUpperCase = /[A-Z]/.test(password);
-    const hasDigit = /\d/.test(password);
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    const isLongEnough = password.length >= 8;
+  //   const hasLowerCase = /[a-z]/.test(password);
+  //   const hasUpperCase = /[A-Z]/.test(password);
+  //   const hasDigit = /\d/.test(password);
+  //   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+  //   const isLongEnough = password.length >= 8;
     
-    if (isLongEnough && hasLowerCase && hasUpperCase && hasDigit && hasSpecialChar) {
-      return 'strong';
-    } else if (isLongEnough && ((hasLowerCase && hasUpperCase) || (hasDigit && hasSpecialChar))) {
-      return 'medium';
-    } else {
-      return 'weak';
-    }
-  };
+  //   if (isLongEnough && hasLowerCase && hasUpperCase && hasDigit && hasSpecialChar) {
+  //     return 'strong';
+  //   } else if (isLongEnough && ((hasLowerCase && hasUpperCase) || (hasDigit && hasSpecialChar))) {
+  //     return 'medium';
+  //   } else {
+  //     return 'weak';
+  //   }
+  // };
 
   const handleSubmit = async (values: LoginFormValues) => {
     setFormLoading(true);
@@ -186,7 +186,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
       
       <div className={styles.signupSection}>
         <Text className={styles.signupText}>New to Sapientia?</Text>
-        <Link href="/signup" className={styles.signupLink}>
+        <Link href="/auth/signup" className={styles.signupLink}>
           Create Account
         </Link>
       </div>

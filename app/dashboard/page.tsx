@@ -13,12 +13,11 @@ import { getArticles } from '@/services/articlesService';
 import { getMockCourses } from '@/services/coursesService';
 import { getUpcomingDeadlines } from '@/services/deadlinesService';
 import {
-  BulbOutlined,
-  ClockCircleOutlined,
-  FileDoneOutlined,
-  FireOutlined,
-  HourglassOutlined,
-  RocketOutlined,
+	ClockCircleOutlined,
+	FileDoneOutlined,
+	FireOutlined,
+	HourglassOutlined,
+	RocketOutlined,
 } from '@ant-design/icons';
 import { Avatar, Button, Layout, Spin, Typography } from 'antd';
 import React, { useEffect, useState } from 'react';
@@ -27,18 +26,25 @@ import styles from './page.module.css';
 const { Title, Text } = Typography;
 const { Content } = Layout;
 
+interface UserData {
+	name: string;
+	organization: string;
+	avatar: string;
+	progress: {
+		completed: number;
+		loginStreak: number;
+		hoursLearned: number;
+	};
+}
+
 const Dashboard: React.FC = () => {
-	const [loading, setLoading] = useState(true);
-	const [userData, setUserData] = useState<any>(null);
-	const [collapsed, setCollapsed] = useState(false);
-	const [mobileView, setMobileView] = useState(false);
+	const [loading, setLoading] = useState<boolean>(true);
+	const [userData, setUserData] = useState<UserData | null>(null);
+	const [collapsed, setCollapsed] = useState<boolean>(false);
+	const [mobileView, setMobileView] = useState<boolean>(false);
 
 	// Estados para os cursos
 	const [enrolledCourses, setEnrolledCourses] = useState<CourseCardProps[]>([]);
-	const [recommendedCourses, setRecommendedCourses] = useState<
-		CourseCardProps[]
-	>([]);
-	const [newCourses, setNewCourses] = useState<CourseCardProps[]>([]);
 	const [coursesLoading, setCoursesLoading] = useState(true);
 
 	const [upcomingDeadlines, setUpcomingDeadlines] = useState<
@@ -82,8 +88,6 @@ const Dashboard: React.FC = () => {
 			// Simula obtenção de dados de cursos do mock service
 			const mockCourses = getMockCourses();
 			setEnrolledCourses(mockCourses.filter((course) => course.isEnrolled));
-			setRecommendedCourses(mockCourses.filter((course) => !course.isEnrolled));
-			setNewCourses(mockCourses.slice(0, 2)); // Apenas os 2 primeiros para demonstração
 
 			try {
 				const articles = await getArticles({ limit: 3, trending: true });
@@ -151,7 +155,7 @@ const Dashboard: React.FC = () => {
 								<div className={styles.progressStats}>
 									<StatsKPI
 										label="Completed Courses"
-										value={userData?.progress.completed}
+										value={userData?.progress.completed ?? 0}
 										icon={
 											<FileDoneOutlined
 												style={{
@@ -163,7 +167,7 @@ const Dashboard: React.FC = () => {
 									/>
 									<StatsKPI
 										label="Login Streak"
-										value={userData?.progress.loginStreak}
+										value={userData?.progress.loginStreak ?? 0}
 										icon={
 											<FireOutlined
 												style={{
@@ -175,7 +179,7 @@ const Dashboard: React.FC = () => {
 									/>
 									<StatsKPI
 										label="Hours Learned"
-										value={userData?.progress.hoursLearned}
+										value={userData?.progress.hoursLearned ?? 0}
 										icon={
 											<HourglassOutlined
 												style={{

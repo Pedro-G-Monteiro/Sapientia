@@ -1,7 +1,7 @@
 'use client';
 
 import { ClockCircleOutlined, EyeOutlined, FileTextOutlined, LikeOutlined } from '@ant-design/icons';
-import { Avatar, Card, Tag, Tooltip, Typography } from 'antd';
+import { Avatar, Tag, Tooltip, Typography } from 'antd';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import styles from './ArticleCard.module.css';

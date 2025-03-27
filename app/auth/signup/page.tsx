@@ -3,7 +3,7 @@
 import SignUpForm from "@/components/ui/Auth/SignUpForm";
 import { Typography } from "antd";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./page.module.css";
 
 const { Title, Paragraph } = Typography;
@@ -36,6 +36,7 @@ const SignUpPage = () => {
   const handleSignUpSuccess = () => {
     setIsLoading(true);
     setAnnouncementMessage("Account created successfully. Redirecting to dashboard...");
+    console.log(announcementMessage);
 
     // Simulate authentication delay
     setTimeout(() => {

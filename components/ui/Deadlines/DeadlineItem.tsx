@@ -1,7 +1,7 @@
 'use client';
 
-import { CalendarOutlined, ClockCircleOutlined } from '@ant-design/icons';
-import { Badge, Progress, Tag, Typography } from 'antd';
+import { CalendarOutlined } from '@ant-design/icons';
+import { Badge, Tag, Typography } from 'antd';
 import React from 'react';
 import styles from './DeadlineItem.module.css';
 
@@ -24,7 +24,6 @@ const DeadlineItem: React.FC<DeadlineItemProps> = ({
   courseTitle,
   dueDate,
   completed = false,
-  progress = 0,
   priority = 'medium',
   onClick,
 }) => {
@@ -106,7 +105,7 @@ const DeadlineItem: React.FC<DeadlineItemProps> = ({
             )}
           </div>
           <Badge 
-            status={getStatusColor() as any} 
+            status={getStatusColor() as "success" | "error" | "default" | "processing" | "warning"} 
             text={getStatusText()} 
             className={styles.deadlineStatus}
           />
