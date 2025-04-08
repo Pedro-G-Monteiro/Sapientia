@@ -231,6 +231,18 @@ export const fetchNewCourses = async (
 	}
 };
 
+// Função para obter um curso específico pelo ID
+export const getMockCourseById = async (courseId: number): Promise<CourseCardProps | null> => {
+  // Simulação de uma chamada de API com um pequeno delay
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const allCourses = getMockCourses();
+      const course = allCourses.find(course => course.courseId === courseId);
+      resolve(course || null);
+    }, 500);
+  });
+};
+
 // Mock data for testing the course card component
 export const getMockCourses = (): CourseCardProps[] => {
 	return [

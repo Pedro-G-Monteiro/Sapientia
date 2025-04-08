@@ -36,8 +36,8 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
 		{
 			key: '/courses',
 			icon: <BookOutlined />,
-			label: 'My Courses',
-			onClick: () => router.push('/my-courses'),
+			label: 'Courses',
+			onClick: () => router.push('/courses'),
 		},
 		{
 			key: '/knowledge',

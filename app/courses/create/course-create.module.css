@@ -1,0 +1,525 @@
+/* course-create.module.css */
+.mainLayout {
+  min-height: 100vh;
+}
+
+.contentLayout {
+  margin-left: 240px;
+  transition: margin-left 0.3s;
+}
+
+.mainLayout :global(.ant-layout-sider-collapsed) + .contentLayout {
+  margin-left: 80px;
+}
+
+@media (max-width: 768px) {
+  .contentLayout {
+    margin-left: 0 !important;
+  }
+}
+
+.siteContent {
+  padding: 0;
+  background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-color-secondary) 100%);
+}
+
+.pageHeader {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color-dark) 100%);
+  padding: 24px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.pageHeader::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+.pageHeaderContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.courseFormContainer {
+  max-width: 1400px;
+  margin: 24px auto;
+  padding: 0 24px;
+}
+
+.formCard {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+}
+
+.formTabs {
+  margin-top: -16px;
+}
+
+.thumbnailUploader {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.thumbnailPreview {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.thumbnailPreview:hover {
+  transform: scale(1.02);
+}
+
+.thumbnailActions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  padding: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.thumbnailPreview:hover .thumbnailActions {
+  opacity: 1;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+  min-height: 32px;
+  padding: 4px;
+  background-color: var(--bg-color-secondary);
+  border-radius: 4px;
+}
+
+.tag {
+  margin-right: 0 !important;
+  user-select: none;
+}
+
+.addTagInput,
+.addItemInput {
+  display: flex;
+  gap: 8px;
+}
+
+.addTagInput input,
+.addItemInput input {
+  flex: 1;
+}
+
+.moduleContainer {
+  padding: 16px 0;
+}
+
+.modulesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.modulesList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.moduleCard {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.moduleCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.moduleCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.dragHandle {
+  cursor: grab;
+  color: var(--text-color-tertiary);
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.dragHandle:hover {
+  background-color: var(--bg-color-secondary);
+}
+
+.moduleDescription {
+  margin-bottom: 20px;
+  background-color: var(--bg-color-secondary);
+  border-radius: 4px;
+}
+
+.lessonsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 32px;
+}
+
+.lessonItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: var(--bg-color-secondary);
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.lessonItem:hover {
+  background-color: var(--bg-color);
+  border-color: var(--primary-color-light);
+  transform: translateX(4px);
+}
+
+.lessonItemContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lessonInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lessonTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lessonMeta {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+}
+
+.lessonActions {
+  display: flex;
+  gap: 8px;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.lessonItem:hover .lessonActions {
+  opacity: 1;
+}
+
+.sectionContainer {
+  margin-bottom: 32px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--bg-color-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  min-height: 32px;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s ease;
+}
+
+.listItem:hover {
+  transform: translateX(4px);
+}
+
+.requirementsContainer,
+.settingsContainer {
+  padding: 16px 0;
+}
+
+.settingsCard {
+  height: 100%;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.attachmentsSection {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.previewContainer {
+  padding: 16px;
+}
+
+.previewCard {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+}
+
+.previewThumbnail {
+  height: 220px;
+  background-color: var(--primary-color-lighter);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: white;
+}
+
+.previewContent {
+  padding: 24px;
+  background-color: var(--bg-color);
+}
+
+.previewMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.previewModuleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.draftTag {
+  margin-left: 8px;
+}
+
+.previewLessonItem {
+  padding: 12px !important;
+  background-color: var(--bg-color-secondary);
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.previewLessonContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.previewLessonIcon {
+  font-size: 18px;
+  color: var(--primary-color);
+}
+
+/* Dark mode adjustments */
+:global(.dark) .formCard,
+:global(.dark) .moduleCard,
+:global(.dark) .settingsCard,
+:global(.dark) .previewCard,
+:global(.dark) .sectionContainer {
+  background-color: var(--bg-color-secondary);
+  border-color: var(--border-color);
+}
+
+:global(.dark) .previewContent {
+  background-color: var(--bg-color-secondary);
+}
+
+:global(.dark) .listItem,
+:global(.dark) .previewLessonItem {
+  background-color: var(--bg-color);
+}
+
+:global(.dark) .tagsContainer,
+:global(.dark) .moduleDescription {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+:global(.dark) .lessonItem {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+:global(.dark) .lessonItem:hover {
+  background-color: var(--bg-color);
+  border-color: var(--primary-color-light);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .pageHeaderContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .formCard {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .courseFormContainer {
+    padding: 0 16px;
+  }
+  
+  .pageHeader {
+    padding: 16px;
+  }
+  
+  .addTagInput input,
+  .addItemInput input {
+    width: 100%;
+  }
+  
+  .moduleCardHeader {
+    flex-wrap: wrap;
+  }
+  
+  .previewCard {
+    flex-direction: column;
+  }
+  
+  .previewThumbnail {
+    width: 100%;
+    height: 150px;
+  }
+  
+  .thumbnailPreview {
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lessonItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  
+  .lessonActions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+  
+  .moduleCardHeader {
+    gap: 8px;
+  }
+  
+  .tagsContainer {
+    padding: 8px 4px;
+  }
+  
+  .courseFormContainer {
+    padding: 0 12px;
+  }
+  
+  .previewContent {
+    padding: 16px;
+  }
+  
+  .previewMeta {
+    gap: 8px;
+  }
+}
+
+/* Animation effects */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.moduleCard {
+  animation: slideIn 0.3s ease-out;
+  animation-fill-mode: both;
+}
+
+.modulesList > div:nth-child(1) .moduleCard { animation-delay: 0.05s; }
+.modulesList > div:nth-child(2) .moduleCard { animation-delay: 0.1s; }
+.modulesList > div:nth-child(3) .moduleCard { animation-delay: 0.15s; }
+.modulesList > div:nth-child(4) .moduleCard { animation-delay: 0.2s; }
+.modulesList > div:nth-child(5) .moduleCard { animation-delay: 0.25s; }
+
+/* Dragover state for drop targets */
+.lessonsList.dragOver {
+  background-color: var(--primary-color-lighter);
+  border-radius: 8px;
+  padding: 8px;
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .contentLayout,
+  .thumbnailPreview,
+  .moduleCard,
+  .lessonItem,
+  .listItem {
+    transition: none;
+    animation: none !important;
+  }
+  
+  .moduleCard:hover,
+  .lessonItem:hover,
+  .listItem:hover {
+    transform: none;
+  }
+}

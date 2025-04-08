@@ -10,6 +10,7 @@ interface CourseListProps {
   layout?: 'grid' | 'horizontal';
   emptyText?: string;
   maxItemsBeforeScroll?: number; // Máximo de itens antes de forçar scroll
+  forceGrid?: boolean; // Força o layout para grid
 }
 
 const CourseList: React.FC<CourseListProps> = ({
@@ -17,7 +18,8 @@ const CourseList: React.FC<CourseListProps> = ({
   loading = false,
   layout = 'grid',
   emptyText = 'No courses available',
-  maxItemsBeforeScroll = 5 // Por padrão, força scroll após 5 itens
+  maxItemsBeforeScroll = 5, // Por padrão, força scroll após 5 itens
+  forceGrid = false // Força o layout para grid
 }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showScrollButtons, setShowScrollButtons] = useState(false);
@@ -91,7 +93,7 @@ const CourseList: React.FC<CourseListProps> = ({
   }
 
   // Força o layout horizontal quando há muitos cursos
-  const useHorizontalLayout = layout === 'horizontal' || (courses.length > maxItemsBeforeScroll);
+  const useHorizontalLayout = !forceGrid && (layout === 'horizontal' || (courses.length > maxItemsBeforeScroll));
 
   return (
     <div className={styles.courseListContainer}>
