@@ -37,6 +37,7 @@ export interface CourseCardProps {
 		name: string;
 		logoUrl?: string;
 	};
+	isPreview?: boolean;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({
@@ -51,6 +52,7 @@ const CourseCard: React.FC<CourseCardProps> = ({
 	isEnrolled = false,
 	isCompleted = false,
 	organization,
+	isPreview = false,
 }) => {
 	const router = useRouter();
 
@@ -137,8 +139,9 @@ const CourseCard: React.FC<CourseCardProps> = ({
 	return (
 		<Card
 			className={styles.courseCard}
-			onClick={handleCardClick}
+			onClick={ isPreview ? undefined : handleCardClick}
 			styles={{ body: { padding: 0, height: '100%' } }}
+			hoverable={!isPreview}
 		>
 			<div className={styles.courseCardHeader}>
 				{thumbnailUrl ? (

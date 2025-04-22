@@ -1,0 +1,127 @@
+/* components/ui/CourseCreation/Steps/PublishingOptions.module.css */
+.publishingContainer {
+  padding: 16px 0;
+}
+
+.sectionDescription {
+  margin-bottom: 24px !important;
+}
+
+.publishForm {
+  max-width: 100%;
+}
+
+.sectionTitle {
+  margin-top: 24px !important;
+  margin-bottom: 16px !important;
+}
+
+.checkboxLabel {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.checkboxDescription {
+  display: block;
+  margin-top: 4px;
+}
+
+.publishedItem,
+.visibilityItem,
+.approvalItem {
+  margin-bottom: 16px;
+}
+
+.datePicker {
+  width: 300px;
+}
+
+.enrollmentOptions {
+  margin-top: 8px;
+}
+
+.radioOption {
+  display: flex;
+  flex-direction: column;
+}
+
+.radioLabel {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.radioDescription {
+  margin-top: 4px;
+}
+
+.summaryContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.summaryCard {
+  background-color: var(--bg-color);
+  border-radius: 8px;
+}
+
+.completionScore {
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.completionAlert {
+  margin-top: 16px;
+}
+
+.courseMeta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.metaIcon {
+  color: var(--primary-color);
+  font-size: 18px;
+}
+
+.publishingTips {
+  background-color: var(--bg-color-secondary);
+  border-radius: 8px;
+  padding: 16px 24px;
+}
+
+.tipsList {
+  padding-left: 20px;
+  margin-top: 12px;
+}
+
+.tipsList li {
+  margin-bottom: 8px;
+  color: var(--text-color-secondary);
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .summaryContainer {
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .courseMeta {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .datePicker {
+    width: 100%;
+  }
+}

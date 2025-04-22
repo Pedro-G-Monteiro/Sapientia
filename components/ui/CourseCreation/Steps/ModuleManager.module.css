@@ -1,0 +1,94 @@
+/* components/ui/CourseCreation/Steps/ModuleManager.module.css */
+.moduleManagerContainer {
+    padding: 16px 0;
+  }
+  
+  .managerHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  
+  .headerDescription {
+    display: block;
+    margin-top: 4px;
+  }
+  
+  .emptyState {
+    background-color: var(--bg-color-secondary);
+    border-radius: 8px;
+    padding: 40px;
+    margin-top: 20px;
+  }
+  
+  .modulesList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .moduleCard {
+    background-color: var(--bg-color);
+    transition: all 0.3s ease;
+  }
+  
+  .moduleCard:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  
+  .moduleCardTitle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .moduleNumber {
+    font-weight: normal;
+    color: var(--text-color-secondary);
+    font-size: 0.9em;
+  }
+  
+  .moduleDescription {
+    margin-bottom: 16px !important;
+  }
+  
+  .moduleFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+  
+  .reorderButtons {
+    display: flex;
+    gap: 4px;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .managerHeader {
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    
+    .managerHeader button {
+      align-self: flex-start;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .moduleCardTitle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+    
+    .moduleFooter {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+  }

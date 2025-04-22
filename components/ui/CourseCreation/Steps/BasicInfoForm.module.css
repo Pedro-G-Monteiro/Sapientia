@@ -1,0 +1,110 @@
+/* components/ui/CourseCreation/Steps/BasicInfoForm.module.css */
+.basicInfoContainer {
+  padding: 16px 0;
+}
+
+.formPreviewLayout {
+  display: flex;
+  gap: 32px;
+}
+
+.formSection {
+  flex: 3;
+  min-width: 0;
+}
+
+.previewSection {
+  flex: 2;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.divider {
+  height: auto;
+}
+
+.sectionDescription {
+  display: block;
+  margin-bottom: 24px;
+}
+
+.form {
+  max-width: 100%;
+}
+
+.formRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.formHalfItem {
+  flex: 1;
+  min-width: 200px;
+}
+
+.pricingSection {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.switchLabel {
+  margin-left: 12px;
+}
+
+.uploader {
+  width: 100%;
+}
+
+.previewHeader {
+  margin-bottom: 24px;
+}
+
+.courseCardPreview {
+  width: 100%;
+  max-width: 320px;
+  align-self: center;
+  margin: auto 0; /* Adiciona margem automática vertical */
+}
+
+.previewNote {
+  margin-top: 24px;
+  text-align: center;
+  padding: 12px;
+  background-color: var(--bg-color-secondary);
+  border-radius: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .formPreviewLayout {
+    flex-direction: column;
+  }
+  
+  .divider {
+    display: none;
+  }
+  
+  .courseCardPreview {
+    max-width: 280px;
+    margin: 24px auto; /* Adiciona margem quando em layout responsivo */
+  }
+}
+
+@media (max-width: 768px) {
+  .formRow {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .formHalfItem {
+    width: 100%;
+  }
+  
+  .courseCardPreview {
+    max-width: 100%;
+  }
+}

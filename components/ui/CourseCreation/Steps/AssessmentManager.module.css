@@ -1,0 +1,121 @@
+/* components/ui/CourseCreation/Steps/AssessmentManager.module.css */
+.assessmentManagerContainer {
+  padding: 16px 0;
+}
+
+.managerHeader {
+  margin-bottom: 16px;
+}
+
+.headerDescription {
+  display: block;
+  margin-top: 4px;
+}
+
+.assessmentTabs {
+  background-color: var(--bg-color);
+  border-radius: 8px;
+}
+
+.tabContent {
+  padding: 16px 0;
+}
+
+.tabDescription {
+  margin-bottom: 20px;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: var(--bg-color-secondary);
+  border-radius: 8px;
+}
+
+.emptyStateAction {
+  margin-top: 20px;
+}
+
+.modulesCollapse {
+  background-color: var(--bg-color) !important;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.lessonsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 8px 0;
+}
+
+.lessonAssessmentCard {
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.sectionHeader h5 {
+  margin: 0;
+}
+
+.quizList,
+.assignmentList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quizItem,
+.assignmentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background-color: var(--bg-color-secondary);
+  border-radius: 6px;
+}
+
+.quizInfo,
+.assignmentInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.assessmentEmpty {
+  margin: 16px 0;
+  padding: 20px 0;
+}
+
+.lessonEmpty {
+  padding: 20px 0;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .quizItem,
+  .assignmentItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .quizItem button,
+  .assignmentItem button {
+    align-self: flex-end;
+    margin-top: -30px;
+  }
+}

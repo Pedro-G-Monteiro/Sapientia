@@ -1,0 +1,156 @@
+/* components/ui/CourseCreation/Modals/QuizModal.module.css */
+.quizModal :global(.ant-modal-body) {
+  padding: 0;
+}
+
+.quizModal :global(.ant-tabs-nav) {
+  margin-bottom: 0 !important;
+  padding: 0 24px;
+}
+
+.modalTitle {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalSubtitle {
+  font-size: 0.85rem;
+  font-weight: normal;
+  margin-top: 4px;
+}
+
+.tabContent {
+  padding: 24px;
+}
+
+.formRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.formHalfItem {
+  flex: 1;
+  min-width: 200px;
+}
+
+.noQuestions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 0;
+  background-color: var(--bg-color-secondary);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.questionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.questionCard {
+  background-color: var(--bg-color-secondary);
+  border-radius: 8px;
+}
+
+.questionCardTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.questionText {
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.questionMeta {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.answerPreview {
+  margin-top: 12px;
+}
+
+.answerPreviewItem {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.correctIcon {
+  color: var(--success-color);
+}
+
+.incorrectIcon {
+  color: var(--error-color);
+}
+
+.addQuestionButton {
+  width: 100%;
+  height: 40px;
+}
+
+.answersList {
+  margin-top: 16px;
+}
+
+.answerItem {
+  background-color: var(--bg-color-secondary);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border-color);
+}
+
+.answerHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.answerNumber {
+  font-weight: 500;
+}
+
+.answerText {
+  margin-bottom: 12px;
+}
+
+.answerExplanation {
+  margin-bottom: 0;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .formRow {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .answerHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .answerHeader button {
+    align-self: flex-end;
+    margin-top: -30px;
+  }
+}

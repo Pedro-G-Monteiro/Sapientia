@@ -1,0 +1,146 @@
+/* components/ui/CourseCreation/Steps/LessonManager.module.css */
+.lessonManagerContainer {
+    padding: 16px 0;
+  }
+  
+  .managerHeader {
+    margin-bottom: 24px;
+  }
+  
+  .headerDescription {
+    display: block;
+    margin-top: 4px;
+  }
+  
+  .emptyState {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: var(--bg-color-secondary);
+    border-radius: 8px;
+  }
+  
+  .emptyStateAction {
+    margin-top: 20px;
+  }
+  
+  .modulesCollapse {
+    background-color: var(--bg-color) !important;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .moduleHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .moduleTitle {
+    font-weight: 500;
+  }
+  
+  .lessonCount {
+    color: var(--text-color-tertiary);
+    font-size: 0.9em;
+  }
+  
+  .moduleEmpty {
+    padding: 20px 0;
+  }
+  
+  .lessonsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .lessonCard {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+  }
+  
+  .lessonCard:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+  
+  .lessonCardTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .lessonNumber {
+    font-weight: normal;
+    color: var(--text-color-secondary);
+    font-size: 0.9em;
+  }
+  
+  .lessonContent {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .lessonDescription {
+    margin-bottom: 12px !important;
+  }
+  
+  .lessonMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .resourcesLinks {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .resourceLink {
+    padding: 0;
+    height: auto;
+  }
+  
+  .addLessonContainer {
+    margin-top: 16px;
+    text-align: center;
+  }
+  
+  .addLessonButton {
+    width: 100%;
+    height: 44px;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .moduleHeader {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+    
+    .lessonMeta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    
+    .resourcesLinks {
+      width: 100%;
+      justify-content: flex-start;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .lessonCardTitle {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+  }

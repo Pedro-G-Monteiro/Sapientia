@@ -1,0 +1,42 @@
+/* components/ui/CourseCreation/Modals/AssignmentModal.module.css */
+.assignmentModal :global(.ant-modal-body) {
+    padding: 24px;
+  }
+  
+  .modalTitle {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modalSubtitle {
+    font-size: 0.85rem;
+    font-weight: normal;
+    margin-top: 4px;
+  }
+  
+  .formRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  
+  .formHalfItem {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .formRow {
+      flex-direction: column;
+      gap: 0;
+    }
+  }

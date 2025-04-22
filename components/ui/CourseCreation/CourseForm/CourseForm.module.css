@@ -1,0 +1,73 @@
+/* components/ui/CourseCreation/CourseForm/CourseForm.module.css */
+.courseFormContainer {
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+  
+  .stepsNavigation {
+    padding: 24px 24px 0;
+    margin-bottom: 24px;
+  }
+  
+  .stepContent {
+    padding: 0 24px 24px;
+    min-height: 300px;
+  }
+  
+  .formActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-color-secondary);
+  }
+  
+  .rightActions {
+    display: flex;
+    gap: 12px;
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .stepsNavigation {
+      padding: 16px 16px 0;
+      overflow-x: auto;
+    }
+    
+    .stepContent {
+      padding: 0 16px 16px;
+    }
+    
+    .formActions {
+      padding: 12px 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    
+    .rightActions {
+      margin-left: auto;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .stepsNavigation {
+      margin-bottom: 16px;
+    }
+    
+    .formActions {
+      flex-direction: column-reverse;
+      align-items: stretch;
+      gap: 12px;
+    }
+    
+    .rightActions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-left: 0;
+    }
+  }
