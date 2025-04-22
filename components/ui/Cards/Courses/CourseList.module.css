@@ -50,11 +50,11 @@
 }
 
 .scrollButtonLeft {
-  left: -40px;
+  left: -25px;
 }
 
 .scrollButtonRight {
-  right: -40px;
+  right: -25px;
 }
 
 .scrollButton.disabled {

@@ -186,7 +186,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
       
       <div className={styles.signupSection}>
         <Text className={styles.signupText}>New to Sapientia?</Text>
-        <Link href="/auth/signup" className={styles.signupLink}>
+        <Link href="/signup" className={styles.signupLink}>
           Create Account
         </Link>
       </div>

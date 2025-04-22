@@ -35,14 +35,12 @@ interface AppHeaderProps {
 	collapsed: boolean;
 	setCollapsed: (collapsed: boolean) => void;
 	userData: UserData | null;
-	mobileView: boolean;
 }
 
 const AppHeader: React.FC<AppHeaderProps> = ({
 	collapsed,
 	setCollapsed,
 	userData,
-	mobileView,
 }) => {
 	const router = useRouter();
 	const [searchVisible, setSearchVisible] = useState(false);
@@ -172,24 +170,18 @@ const AppHeader: React.FC<AppHeaderProps> = ({
 	};
 
 	return (
-		<Header className={styles.header} style={{ position: 'sticky'}}>
-			{mobileView && (
+		<Header className={styles.header}>
+			<div className={styles.leftSection}>
 				<Button
 					type="text"
 					icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
 					onClick={() => setCollapsed(!collapsed)}
 					className={styles.mobileMenuButton}
 				/>
-			)}
 
-			<Button
-				type="text"
-				icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-				onClick={() => setCollapsed(!collapsed)}
-				className={styles.collapseButton}
-			/>
+			</div>
+
 			<div className={styles.headerActions}>
-				<div className={styles.siderCollapser}></div>
 				<div className={styles.searchContainer}>
 					{searchVisible ? (
 						<Input
@@ -239,14 +231,14 @@ const AppHeader: React.FC<AppHeaderProps> = ({
 				</Popover>
 
 				<Dropdown
-					menu={{ items: userMenuItems, className:styles.userDropdown }}
+					menu={{ items: userMenuItems, className: styles.userDropdown }}
 					placement="bottomRight"
 					trigger={['click']}
 					arrow={{ pointAtCenter: true }}
 				>
 					<Avatar
 						src={userData?.avatar}
-						size="large"
+						size="default"
 						className={styles.headerAvatar}
 					/>
 				</Dropdown>

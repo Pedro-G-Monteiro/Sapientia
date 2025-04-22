@@ -1,37 +1,10 @@
-/* course-details.module.css */
-.mainLayout {
-  min-height: 100vh;
-}
-
-.contentLayout {
-  margin-left: 240px;
-  transition: margin-left 0.3s;
-}
-
-.mainLayout :global(.ant-layout-sider-collapsed) + .contentLayout {
-  margin-left: 80px;
-}
-
-@media (max-width: 768px) {
-  .contentLayout {
-    margin-left: 0 !important;
-  }
-}
-
-.siteContent {
-  padding: 0;
-  background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-color-secondary) 100%);
-}
-
 .courseContainer {
-  max-width: 1400px;
   margin: 0 auto;
   padding: 24px;
 }
 
 .backButtonContainer {
   padding: 16px 24px 0 24px;
-  max-width: 1400px;
   margin: 0 auto;
 }
 

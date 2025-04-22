@@ -39,7 +39,7 @@ export const getMockArticles = (): ArticleCardProps[] => {
     },
     {
       id: 3,
-      title: 'Next.js 14: What&apos;s New and Why It Matters',
+      title: 'Next.js 14: What\'s New and Why It Matters',
       excerpt: 'Explore the latest features of Next.js 14 and how they can improve your web development workflow.',
       thumbnailUrl: 'https://picsum.photos/id/20/800/600',
       category: 'Technology',

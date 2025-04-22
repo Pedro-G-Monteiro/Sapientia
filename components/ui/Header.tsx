@@ -23,23 +23,23 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({
-  title = 'Plataforma Educacional',
+  title = 'Educational Platform',
   logoUrl,
   onMenuClick,
   isAuthenticated = false,
-  username = 'Usuário',
+  username = 'User',
 }) => {
   // Menu do usuário para quando estiver autenticado
   const userMenu = {
     items: [
       {
         key: 'profile',
-        label: 'Meu Perfil',
+        label: 'My Profile',
         icon: <UserOutlined />,
       },
       {
         key: 'settings',
-        label: 'Configurações',
+        label: 'Settings',
         icon: <SettingOutlined />,
       },
       {
@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({
       } as MenuDividerType,
       {
         key: 'logout',
-        label: 'Sair',
+        label: 'Logout',
         icon: <LogoutOutlined />,
         danger: true,
       },
@@ -114,10 +114,10 @@ const Header: React.FC<HeaderProps> = ({
           ) : (
             <div className={styles.authButtons}>
               <Button type="link" className={styles.loginButton}>
-                <Link href="/auth/login">Entrar</Link>
+                <Link href="/login">Login</Link>
               </Button>
               <Button type="primary">
-                <Link href="/auth/register">Cadastrar</Link>
+                <Link href="/signup">Register</Link>
               </Button>
             </div>
           )}

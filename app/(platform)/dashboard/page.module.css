@@ -1,0 +1,339 @@
+.siteContent {
+  padding: 0;
+  background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-color-secondary) 100%);
+}
+
+/* Loading Screen */
+.loadingContainer {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, var(--primary-color-darker) 0%, var(--primary-color) 100%);
+}
+
+.loadingContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.loadingText {
+  color: white;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Hero Section */
+.heroSection {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  padding: 40px 24px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.heroSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity: 0.6;
+}
+
+.heroContent {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.userWelcome {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.userAvatar {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.welcomeText h2 {
+  margin: 0;
+  font-weight: 700;
+  color: white;
+  font-size: 2.2rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.orgText {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.progressStats {
+  display: flex;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Main Content Container */
+.dashboardContainer {
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* Section Headers */
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.sectionTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sectionIcon {
+  font-size: 24px;
+  color: var(--primary-color);
+  background: var(--bg-color-secondary);
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.sectionHeader h3, 
+.sectionHeader h4 {
+  margin: 0;
+}
+
+.viewAllButton {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.viewAllButton:hover {
+  color: var(--primary-color-light);
+  background: transparent;
+}
+
+/* Continue Learning Section */
+.continueSection {
+  margin-bottom: 40px;
+}
+
+/* Two-column Layout */
+.twoColumnLayout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+/* Knowledge Center Section */
+.knowledgeSection {
+  margin-bottom: 40px;
+}
+
+/* Side Column */
+.sideColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Deadlines Section */
+.deadlinesSection {
+  border-radius: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 1500px) {
+  .twoColumnLayout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .welcomeText h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .heroContent {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+  
+  .progressStats {
+    width: 100%;
+    justify-content: space-around;
+    padding: 16px 12px;
+  }
+
+}
+
+@media (max-width: 992px) {
+  .heroSection {
+    padding: 30px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .progressStats {
+    padding: 16px 12px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 430px) {
+  .progressStats {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    overflow-x: visible;
+    overflow-y: auto;
+    max-height: 260px;
+  }
+  
+  .heroSection {
+    padding: 20px 12px 20px;
+  }
+  
+  .heroContent {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .userWelcome {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+  
+  .welcomeText h2 {
+    font-size: 1.6rem;
+    text-align: center;
+    margin-bottom: 4px !important;
+  }
+  
+  .orgText {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  
+  .userAvatar {
+    width: 70px !important;
+    height: 70px !important;
+    min-width: 70px !important;
+    border-width: 2px;
+  }
+}
+
+/* Melhorias para as seções de conteúdo */
+@media (max-width: 430px) {
+  .sectionHeader {
+    margin-bottom: 16px;
+  }
+  
+  .sectionTitleGroup {
+    gap: 10px;
+  }
+  
+  .sectionIcon {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+  
+  .sectionHeader h3 {
+    font-size: 1.2rem;
+  }
+  
+  .sectionHeader h4 {
+    font-size: 1.1rem;
+  }
+  
+  .viewAllButton {
+    font-size: 0.85rem;
+  }
+  
+  .dashboardContainer {
+    padding: 16px 12px;
+  }
+  
+  .continueSection {
+    margin-bottom: 30px;
+  }
+}
+
+/* Ajustes para scroll horizontal no CourseList */
+@media (max-width: 480px) {
+  .horizontalScroll {
+    padding-bottom: 20px;
+    gap: 12px;
+  }
+  
+  .courseCard {
+    min-width: 220px;
+    height: 200px;
+  }
+}
+
+/* Ajustes específicos para dispositivos muito pequenos */
+@media (max-width: 320px) {
+  .welcomeText h2 {
+    font-size: 1.4rem;
+  }
+  
+  .sectionIcon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+  
+  .courseCard {
+    min-width: 200px;
+    height: 190px;
+  }
+  
+  .dashboardContainer {
+    padding: 12px 8px;
+  }
+}

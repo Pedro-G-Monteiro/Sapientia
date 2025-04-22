@@ -7,7 +7,12 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+}
+
+.mobileDeadline {
+  padding: 12px;
+  border-radius: 10px;
 }
 
 .deadlineItem:hover {
@@ -110,19 +115,89 @@
 }
 
 /* Responsiveness */
+@media (max-width: 768px) {
+  .deadlineItem {
+    padding: 14px;
+    margin-bottom: 8px;
+  }
+  
+  .deadlineTitle {
+    font-size: 0.95rem !important;
+  }
+  
+  .courseTitle {
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+  
+  .deadlineDate {
+    font-size: 0.8rem;
+  }
+  
+  .priorityTag {
+    font-size: 0.7rem;
+    padding: 0 6px;
+    height: 20px;
+    line-height: 20px;
+  }
+}
+
 @media (max-width: 480px) {
+  .deadlineItem {
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+  }
+  
   .deadlineHeader {
-    flex-direction: column;
-    align-items: flex-start;
+    margin-bottom: 6px;
+  }
+  
+  .deadlineTitle {
+    font-size: 0.85rem !important;
+  }
+  
+  .courseTitle {
+    font-size: 0.7rem;
+    margin-bottom: 3px;
   }
   
   .deadlineStatus {
-    margin-left: 0;
-    margin-top: 8px;
+    font-size: 0.7rem;
   }
   
-  .deadlineInfo {
+  .deadlineStatus :global(.ant-badge-status-text) {
+    font-size: 0.7rem;
+  }
+  
+  .deadlineDate {
+    font-size: 0.7rem;
+    gap: 4px;
+  }
+  
+  .deadlineDate svg {
+    font-size: 0.8rem;
+  }
+  
+  .priorityTag {
+    font-size: 0.65rem;
+    padding: 0 4px;
+    height: 18px;
+    line-height: 18px;
+  }
+  
+  /* Melhorar o layout para deadline em telas muito pequenas */
+  .mobileDeadline .deadlineHeader {
     flex-direction: column;
     align-items: flex-start;
+  }
+  
+  .mobileDeadline .deadlineStatus {
+    margin-left: 0;
+    margin-top: 2px;
+  }
+  
+  .mobileDeadline .titleSection {
+    max-width: 100%;
   }
 }

@@ -10,7 +10,7 @@ import {
 } from '@ant-design/icons';
 import { Button, Card, Progress, Tooltip, Typography } from 'antd';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './CourseCard.module.css';
 
 const { Title, Text } = Typography;
@@ -55,6 +55,24 @@ const CourseCard: React.FC<CourseCardProps> = ({
 	const router = useRouter();
 
 	const [favorite, setFavorite] = useState(isFavorite ?? false);
+	const [isMobile, setIsMobile] = useState(false);
+	const [isTablet, setIsTablet] = useState(false);
+
+	// Detector de tamanho de tela
+	useEffect(() => {
+		const checkScreenSize = () => {
+			const width = window.innerWidth;
+			setIsMobile(width <= 480);
+			setIsTablet(width > 480 && width <= 768);
+		};
+		
+		checkScreenSize();
+		window.addEventListener('resize', checkScreenSize);
+		
+		return () => {
+			window.removeEventListener('resize', checkScreenSize);
+		};
+	}, []);
 
 	const handleFavoriteClick = (e: React.MouseEvent) => {
 		e.stopPropagation(); // Prevent card click navigation
@@ -92,6 +110,28 @@ const CourseCard: React.FC<CourseCardProps> = ({
 		if (!durationHours) return 'Self-paced';
 		if (durationHours < 1) return `${Math.round(durationHours * 60)} min`;
 		return durationHours === 1 ? '1 hour' : `${durationHours} hours`;
+	};
+
+	// Determinar a classe CSS para aplicar à descrição com base no tamanho da tela
+	const getDescriptionClass = () => {
+		if (isMobile) return styles.descriptionOneLine;
+		if (isTablet) return styles.descriptionTwoLines;
+		return styles.descriptionThreeLines;
+	};
+
+	// Truncar a descrição de forma dinâmica
+	const getDescriptionText = () => {
+		if (!description) return "";
+		
+		if (isMobile && description.length > 50) {
+			return `${description.slice(0, 50)}...`;
+		} else if (isTablet && description.length > 80) {
+			return `${description.slice(0, 80)}...`;
+		} else if (description.length > 120) {
+			return `${description.slice(0, 120)}...`;
+		}
+		
+		return description;
 	};
 
 	return (
@@ -134,16 +174,17 @@ const CourseCard: React.FC<CourseCardProps> = ({
 
 				{description && (
 					<div className={styles.courseDescription}>
-						{description.length > 100 ? (
-							<Tooltip title={description}>
-								<Text type="secondary">
-									{description.slice(0, 20)}...{' '}
-									<span className={styles.seeMore}>See more</span>
-								</Text>
-							</Tooltip>
-						) : (
-							<Text type="secondary">{description}</Text>
-						)}
+						<Tooltip title={description}>
+							<Text 
+								type="secondary" 
+								className={getDescriptionClass()}
+							>
+								{getDescriptionText()}
+								{description.length > (isMobile ? 50 : isTablet ? 80 : 120) && (
+									<span className={styles.seeMore}> See more</span>
+								)}
+							</Text>
+						</Tooltip>
 					</div>
 				)}
 

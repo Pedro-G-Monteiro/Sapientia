@@ -450,7 +450,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
 
 			<div className={styles.loginSection}>
 				<Text className={styles.loginText}>Already have an account?</Text>
-				<Link href="/auth/login" className={styles.loginLink}>
+				<Link href="/login" className={styles.loginLink}>
 					Sign in
 				</Link>
 			</div>

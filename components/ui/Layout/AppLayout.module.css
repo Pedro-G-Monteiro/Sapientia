@@ -1,0 +1,26 @@
+.mainLayout {
+  min-height: 100vh;
+}
+
+.contentLayout {
+  margin-left: 240px;
+  transition: all 0.3s;
+  margin-left: 0 !important;
+}
+
+.contentCollapsed {
+  margin-left: 80px;
+}
+
+.siteContent {
+  background: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-color-secondary) 100%);
+  min-height: calc(100vh - 64px); /* Altura total menos o header */
+  overflow-x: hidden;
+}
+
+/* Ajustes para mobile */
+@media (max-width: 768px) {
+  .siteContent {
+    padding: 12px;
+  }
+}

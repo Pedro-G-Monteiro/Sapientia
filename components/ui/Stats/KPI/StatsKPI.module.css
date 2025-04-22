@@ -2,6 +2,7 @@
   text-align: center;
   padding: 0 15px;
   position: relative;
+  min-width: 100px;
 }
 
 .statItem:not(:last-child)::after {
@@ -65,4 +66,126 @@
   color: rgba(255, 255, 255, 0.7);
   text-transform: uppercase;
   letter-spacing: 1px;
+}
+
+/* Responsiveness */
+@media (max-width: 992px) {
+  .statItem {
+    padding: 0 12px;
+    min-width: 90px;
+  }
+  
+  .statValue {
+    font-size: 2.2rem;
+    margin-bottom: 4px;
+  }
+  
+  .statLabel {
+    font-size: 0.8rem;
+  }
+  
+  .iconLeft .statIcon,
+  .iconRight .statIcon {
+    margin-right: 8px;
+  }
+  
+  .iconTop .statIcon {
+    margin-bottom: 6px;
+  }
+}
+
+@media (max-width: 768px) {
+  .statItem {
+    padding: 0 10px;
+    min-width: 80px;
+  }
+  
+  .statItem:not(:last-child)::after {
+    right: -6px;
+  }
+  
+  .statValue {
+    font-size: 1.8rem;
+    margin-bottom: 3px;
+  }
+  
+  .statLabel {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .statItem {
+    min-width: 100%;
+    margin-bottom: 12px;
+    padding: 10px 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .statItem:hover {
+    transform: translateY(-3px);
+  }
+  
+  .statItem:not(:last-child)::after {
+    display: none;
+  }
+  
+  .statContent {
+    justify-content: flex-start;
+    gap: 12px;
+  }
+  
+  .statValue {
+    font-size: 1.6rem;
+    text-align: left;
+  }
+  
+  .statLabel {
+    font-size: 0.7rem;
+    text-align: left;
+  }
+  
+  .iconLeft .statIcon {
+    margin-right: 8px;
+  }
+  
+  /* Garantir que o conteúdo fique alinhado mesmo com diferentes posições de ícone */
+  .iconTop {
+    flex-direction: row;
+  }
+  
+  .iconTop .statIcon {
+    margin-bottom: 0;
+    margin-right: 8px;
+  }
+}
+
+/* Para dispositivos extra pequenos */
+@media (max-width: 320px) {
+  .statItem {
+    min-width: 100%;
+    padding: 8px 6px;
+  }
+  
+  .statValue {
+    font-size: 1.4rem;
+  }
+  
+  .statLabel {
+    font-size: 0.65rem;
+  }
+  
+  .statIcon {
+    transform: scale(0.9);
+  }
+}
+
+/* Acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .statItem {
+    transition: none;
+  }
 }

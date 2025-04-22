@@ -167,7 +167,7 @@ const LandingHeader: React.FC = () => {
       label: (
         <Button
           type="primary" 
-          onClick={() => router.push('/auth/signup')}
+          onClick={() => router.push('/signup')}
           className={styles.mobileGetStartedButton}
           aria-label="Get Started"
         >
@@ -203,8 +203,8 @@ const LandingHeader: React.FC = () => {
             
             {/* Independent Get Started Button - only visible on desktop */}
             <Button
-              type="primary" 
-              onClick={() => router.push('/auth/signup')}
+              type="primary"
+              onClick={() => router.push('/signup')}
               className={styles.getStartedButton}
               aria-label="Get Started"
             >

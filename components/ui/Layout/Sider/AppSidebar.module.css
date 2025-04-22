@@ -10,12 +10,26 @@
   color: var(--text-color);
 }
 
+.mobileSidebar {
+  z-index: 1001; /* Garante que o drawer fique acima de outros elementos */
+}
+
+.mobileSidebar :global(.ant-drawer-content),
+.mobileSidebar :global(.ant-drawer-wrapper-body) {
+  background-color: var(--bg-color-secondary);
+  color: var(--text-color);
+}
+
+.headerContainer {
+  padding-top: 8px;
+}
+
 .logoContainer {
   height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 16px 0;
+  margin: 8px 0 16px;
   cursor: pointer;
 }
 
@@ -49,7 +63,9 @@
 }
 
 /* Dark mode adjustments */
-:global(.dark) .sidebar {
+:global(.dark) .sidebar,
+:global(.dark) .mobileSidebar :global(.ant-drawer-content),
+:global(.dark) .mobileSidebar :global(.ant-drawer-wrapper-body) {
   background-color: var(--bg-color);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 }

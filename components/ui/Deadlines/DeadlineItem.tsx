@@ -2,7 +2,7 @@
 
 import { CalendarOutlined } from '@ant-design/icons';
 import { Badge, Tag, Typography } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './DeadlineItem.module.css';
 
 const { Text, Title } = Typography;
@@ -27,18 +27,32 @@ const DeadlineItem: React.FC<DeadlineItemProps> = ({
   priority = 'medium',
   onClick,
 }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detector de tamanho de tela
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
   // Calcular dias restantes
   const today = new Date();
   const daysLeft = Math.ceil((dueDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
   
   // Formatar a data
   const formatDate = (date: Date) => {
-    const options: Intl.DateTimeFormatOptions = { 
-      day: 'numeric', 
-      month: 'short', 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    };
+    const options: Intl.DateTimeFormatOptions = isMobile 
+      ? { day: 'numeric', month: 'short' }
+      : { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' };
+    
     return date.toLocaleDateString('en-US', options);
   };
   
@@ -89,7 +103,7 @@ const DeadlineItem: React.FC<DeadlineItemProps> = ({
 
   return (
     <div 
-      className={styles.deadlineItem} 
+      className={`${styles.deadlineItem} ${isMobile ? styles.mobileDeadline : ''}`} 
       onClick={handleClick}
     >
       <div className={styles.deadlineContent}>
@@ -116,12 +130,20 @@ const DeadlineItem: React.FC<DeadlineItemProps> = ({
             <div className={styles.deadlineDate}>
               <CalendarOutlined /> <Text>{formatDate(dueDate)}</Text>
             </div>
-            {!completed && (
+            {!completed && !isMobile && (
               <Tag 
                 color={getPriorityColor()}
                 className={styles.priorityTag}
               >
                 {priority.charAt(0).toUpperCase() + priority.slice(1)} Priority
+              </Tag>
+            )}
+            {!completed && isMobile && (
+              <Tag 
+                color={getPriorityColor()}
+                className={styles.priorityTag}
+              >
+                {priority.charAt(0).toUpperCase()}
               </Tag>
             )}
           </div>

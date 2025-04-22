@@ -1,7 +1,7 @@
 .articleItem {
   display: flex;
   gap: 20px;
-  padding: 20px;
+  padding: 16px;
   border-radius: 16px;
   background-color: var(--bg-color);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
@@ -9,6 +9,12 @@
   cursor: pointer;
   height: auto;
   overflow: hidden;
+}
+
+.mobileArticle {
+  padding: 12px;
+  gap: 12px;
+  border-radius: 12px;
 }
 
 .articleItem:hover {
@@ -44,6 +50,8 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .categoryTag {
@@ -146,6 +154,35 @@
   color: var(--text-color-tertiary);
 }
 
+.articleExcerpt {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+/* Classes para diferentes quantidades de linhas no excerpt */
+.excerptOneLine {
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  max-height: 1.5em;
+}
+
+.excerptTwoLines {
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  max-height: 3em;
+}
+
+.excerptThreeLines {
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  max-height: 4.5em;
+}
+
 /* Dark mode adjustments */
 :global(.dark) .articleItem {
   background-color: var(--bg-color-secondary);
@@ -158,6 +195,11 @@
 
 /* Responsiveness */
 @media (max-width: 768px) {
+  .articleItem {
+    padding: 14px;
+    gap: 14px;
+  }
+  
   .articleThumbnail {
     width: 100px;
     min-width: 100px;
@@ -166,35 +208,94 @@
   
   .articleTitle {
     font-size: 0.95rem;
+    margin-bottom: 4px;
   }
   
   .articleExcerpt {
     font-size: 0.8rem;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    margin-bottom: 6px;
+  }
+  
+  .categoryTag {
+    height: 18px;
+    line-height: 18px;
+    font-size: 0.65rem;
+  }
+  
+  .authorName {
+    max-width: 80px;
   }
 }
 
 @media (max-width: 480px) {
+  .articleItem {
+    padding: 12px;
+    gap: 12px;
+    border-radius: 10px;
+  }
+  
   .articleThumbnail {
     width: 80px;
     min-width: 80px;
     height: 60px;
+    border-radius: 8px;
+    font-size: 20px;
   }
   
-  .articleContent {
-    height: auto;
+  .articleTitle {
+    font-size: 0.9rem;
+    margin-bottom: 2px;
   }
   
   .articleHeader {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
+    margin-bottom: 4px;
+  }
+  
+  .articleFooter {
+    margin-top: 2px;
+  }
+  
+  .categoryTag {
+    height: 16px;
+    line-height: 16px;
+    font-size: 0.6rem;
+    padding: 0 6px;
   }
   
   .readTime {
     font-size: 0.65rem;
   }
   
+  .readTimeText {
+    font-size: 0.65rem;
+  }
+  
+  .authorName {
+    max-width: 60px;
+  }
+  
   .articleStats {
     gap: 8px;
+  }
+  
+  .articleExcerpt {
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+  }
+}
+
+@media (max-width: 375px) {
+  .articleExcerpt {
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+}
+
+/* Ajuste para fontes menores em dispositivos com telas muito pequenas */
+@media (max-width: 320px) {
+  .articleExcerpt {
+    font-size: 0.7rem;
   }
 }

@@ -3,7 +3,7 @@
 import { ClockCircleOutlined, EyeOutlined, FileTextOutlined, LikeOutlined } from '@ant-design/icons';
 import { Avatar, Tag, Tooltip, Typography } from 'antd';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ArticleCard.module.css';
 
 const { Text, Title } = Typography;
@@ -38,6 +38,26 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
   author,
 }) => {
   const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTablet, setIsTablet] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(0);
+
+  // Detector de tamanho de tela
+  useEffect(() => {
+    const checkScreenSize = () => {
+      const width = window.innerWidth;
+      setScreenWidth(width);
+      setIsMobile(width <= 480);
+      setIsTablet(width > 480 && width <= 768);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => {
+      window.removeEventListener('resize', checkScreenSize);
+    };
+  }, []);
 
   const handleCardClick = () => {
     router.push(`/knowledge/articles/${id}`);
@@ -84,8 +104,15 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
     return categoryColors[category] || '#faad14';
   };
 
+  // Determinar a classe CSS para aplicar ao excerpt com base no tamanho da tela
+  const getExcerptClass = () => {
+    if (isMobile) return styles.excerptOneLine;
+    if (isTablet) return styles.excerptTwoLines;
+    return styles.excerptThreeLines;
+  };
+
   return (
-    <div className={styles.articleItem} onClick={handleCardClick}>
+    <div className={`${styles.articleItem} ${isMobile ? styles.mobileArticle : ''}`} onClick={handleCardClick}>
       <div 
         className={styles.articleThumbnail}
         style={{ 
@@ -116,8 +143,9 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
           {title}
         </Title>
         
+        {/* Exibir o excerpt com base no tamanho da tela, em vez de escondê-lo completamente em mobile */}
         {excerpt && (
-          <Text type="secondary" className={styles.articleExcerpt} ellipsis>
+          <Text type="secondary" className={`${styles.articleExcerpt} ${getExcerptClass()}`}>
             {excerpt}
           </Text>
         )}
@@ -127,7 +155,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
             {author && (
               <>
                 <Avatar 
-                  size="small" 
+                  size="small"
                   src={author.avatarUrl} 
                   className={styles.authorAvatar}
                 >
@@ -145,7 +173,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
           </div>
           
           <div className={styles.articleStats}>
-            {views !== undefined && (
+            {views !== undefined && !isMobile && (
               <div className={styles.statItem}>
                 <EyeOutlined />
                 <Text className={styles.statText}>{views}</Text>

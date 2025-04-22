@@ -24,11 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en-ES" suppressHydrationWarning>
+    <html lang="en-US" suppressHydrationWarning>
       <body className={`${inter.className}`}>
         <NextThemesProvider attribute="class" defaultTheme="system" enableSystem>
           <ThemeProvider>
-            {children}
+              {children}
           </ThemeProvider>
         </NextThemesProvider>
       </body>
