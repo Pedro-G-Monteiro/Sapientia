@@ -1,5 +1,5 @@
-/* components/ui/CourseCreation/Steps/PublishingOptions.module.css */
-.publishingContainer {
+/* components/ui/CourseCreation/Steps/CourseDetails.module.css */
+.courseDetailsContainer {
   padding: 16px 0;
 }
 
@@ -7,51 +7,27 @@
   margin-bottom: 24px !important;
 }
 
-.publishForm {
+.detailsForm {
   max-width: 100%;
 }
 
 .sectionTitle {
   margin-top: 24px !important;
+  margin-bottom: 8px !important;
+}
+
+.itemDescription {
   margin-bottom: 16px !important;
+  color: var(--text-color-secondary);
 }
 
-.checkboxLabel {
-  font-weight: 500;
-  color: var(--text-color);
+.textArea {
+  width: 100%;
+  font-size: 14px;
 }
 
-.checkboxDescription {
-  display: block;
-  margin-top: 4px;
-}
-
-.publishedItem,
-.visibilityItem,
-.approvalItem {
-  margin-bottom: 16px;
-}
-
-.datePicker {
-  width: 300px;
-}
-
-.enrollmentOptions {
-  margin-top: 8px;
-}
-
-.radioOption {
-  display: flex;
-  flex-direction: column;
-}
-
-.radioLabel {
-  font-weight: 500;
-  color: var(--text-color);
-}
-
-.radioDescription {
-  margin-top: 4px;
+.listItem {
+  margin-bottom: 12px;
 }
 
 .summaryContainer {
@@ -92,7 +68,7 @@
   font-size: 18px;
 }
 
-.publishingTips {
+.courseDetailsTips {
   background-color: var(--bg-color-secondary);
   border-radius: 8px;
   padding: 16px 24px;
@@ -119,9 +95,5 @@
   .courseMeta {
     grid-template-columns: 1fr;
     gap: 12px;
-  }
-
-  .datePicker {
-    width: 100%;
   }
 }

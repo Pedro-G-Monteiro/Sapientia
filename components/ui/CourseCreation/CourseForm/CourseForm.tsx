@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button, message, Steps } from "antd";
+import { Button, Form, message, Steps } from "antd";
 import { useRouter } from "next/navigation";
 import styles from "./CourseForm.module.css";
 
@@ -11,7 +11,7 @@ import BasicInfoForm from "../Steps/BasicInfoForm";
 import ModuleManager from "../Steps/ModuleManager";
 import LessonManager from "../Steps/LessonManager";
 import AssessmentManager from "../Steps/AssessmentManager";
-import PublishingOptions from "../Steps/PublishingOptions";
+import CourseDetails from "../Steps/CourseDetails";
 
 const steps = [
   {
@@ -35,7 +35,7 @@ const steps = [
     content: "AssessmentManager",
   },
   {
-    title: "Publish",
+    title: "Course Details",
     description: "Review & publish",
     content: "PublishingOptions",
   },
@@ -69,7 +69,10 @@ interface CourseData {
       assignments: any[];
     }>;
   }>;
-  publishSettings: {
+  courseDetails: {
+    aboutCourse: string;
+    whatYoullLearn: string[];
+    requirements: string[];
     isPublished: boolean;
     isPublic: boolean;
   };
@@ -90,12 +93,19 @@ const CourseForm: React.FC = () => {
       isFree: true,
     },
     modules: [],
-    publishSettings: {
+    courseDetails: {
+      aboutCourse: "",
+      whatYoullLearn: [""],
+      requirements: [""],
       isPublished: false,
       isPublic: false,
     },
   });
   const [loading, setLoading] = useState(false);
+  const [form] = Form.useForm();
+  const watchedTitle = Form.useWatch("title", form);
+  const watchedDescription = Form.useWatch("description", form);
+
 
   // Salvar dados de uma etapa específica
   const saveStepData = (stepData: any, step: number) => {
@@ -118,7 +128,7 @@ const CourseForm: React.FC = () => {
           break;
 
         case 4:
-          newData.publishSettings = { ...stepData };
+          newData.courseDetails = { ...stepData };
           break;
       }
 
@@ -128,17 +138,18 @@ const CourseForm: React.FC = () => {
 
   // Função para verificar se podemos avançar para a próxima etapa
   const canProceed = () => {
-    switch (currentStep) {
-      case 0:
-        return (
-          !!courseData.basicInfo.title && !!courseData.basicInfo.description
-        );
-      case 1:
-        return courseData.modules.length > 0;
-      default:
-        return true;
+    if (currentStep === 0) {
+      const values = form.getFieldsValue();
+      return !!watchedTitle && !!watchedDescription;
     }
+  
+    if (currentStep === 1) {
+      return courseData.modules.length > 0;
+    }
+  
+    return true;
   };
+  
 
   // Função para salvar rascunho
   const saveDraft = async () => {
@@ -178,11 +189,21 @@ const CourseForm: React.FC = () => {
   };
 
   // Função para avançar para a próxima etapa
-  const nextStep = () => {
-    if (currentStep < steps.length - 1) {
+  const nextStep = async () => {
+    if (currentStep === 0) {
+      try {
+        const values = await form.validateFields();
+        saveStepData(values, 0); // atualiza `courseData` com dados frescos
+      } catch {
+        messageApi.error("Please fill in all required fields.");
+        return;
+      }
+    }
+  
+    if (canProceed()) {
       setCurrentStep(currentStep + 1);
     }
-  };
+  };  
 
   // Função para voltar para a etapa anterior
   const prevStep = () => {
@@ -197,6 +218,7 @@ const CourseForm: React.FC = () => {
       case 0:
         return (
           <BasicInfoForm
+            form={form}
             data={courseData.basicInfo}
             onSave={(data) => saveStepData(data, 0)}
           />
@@ -224,8 +246,8 @@ const CourseForm: React.FC = () => {
         );
       case 4:
         return (
-          <PublishingOptions
-            data={courseData.publishSettings}
+          <CourseDetails
+            data={courseData.courseDetails}
             courseInfo={courseData.basicInfo}
             moduleCount={courseData.modules.length}
             onSave={(data) => saveStepData(data, 4)}

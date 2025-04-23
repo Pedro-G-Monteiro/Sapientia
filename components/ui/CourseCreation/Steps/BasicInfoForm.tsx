@@ -11,6 +11,7 @@ import {
   Typography,
   message,
   Divider,
+  FormInstance,
 } from "antd";
 import { InfoCircleOutlined, UploadOutlined } from "@ant-design/icons";
 import styles from "./BasicInfoForm.module.css";
@@ -34,10 +35,10 @@ interface BasicInfoData {
 interface BasicInfoFormProps {
   data: BasicInfoData;
   onSave: (data: BasicInfoData) => void;
+  form: FormInstance;
 }
 
-const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ data, onSave }) => {
-  const [form] = Form.useForm();
+const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ data, onSave, form }) => {
   const [previewData, setPreviewData] = useState<BasicInfoData>(data);
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
@@ -57,20 +58,25 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ data, onSave }) => {
         },
       ]);
     }
-  }, [data, form]);
+  }, []);
 
   // Handle form values change
   const debouncedSave = useMemo(() => debounce(onSave, 1000), [onSave]);
 
-  const handleValuesChange = (allValues: any) => {
-    const updatedData = {
-      ...allValues,
-      thumbnailUrl: allValues.thumbnailUrl || data.thumbnailUrl,
-    };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const values = form.getFieldsValue();
+      const updatedData = {
+        ...values,
+        thumbnailUrl: values.thumbnailUrl || data.thumbnailUrl,
+      };
 
-    setPreviewData(updatedData);
-    debouncedSave(updatedData);
-  };
+      setPreviewData(updatedData);
+      debouncedSave(updatedData);
+    }, 100); // Atualiza a cada meio segundo (evita overload)
+
+    return () => clearInterval(interval);
+  }, [form, data.thumbnailUrl, debouncedSave]);
 
   const uploadProps = {
     beforeUpload: (file: UploadFile) => {
@@ -148,8 +154,6 @@ const BasicInfoForm: React.FC<BasicInfoFormProps> = ({ data, onSave }) => {
             form={form}
             layout="vertical"
             className={styles.form}
-            onValuesChange={handleValuesChange}
-            initialValues={data}
             requiredMark="optional"
           >
             <Form.Item
