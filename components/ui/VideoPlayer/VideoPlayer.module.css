@@ -1,0 +1,224 @@
+.videoPlayerContainer {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    background-color: #000;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .videoElement {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  /* Loading overlay */
+  .loadingOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Overlay para clicks */
+  .clickOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    cursor: pointer;
+  }
+  
+  /* Controles do player */
+  .controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    padding: 16px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    transform: translateY(10px);
+    z-index: 20;
+  }
+  
+  .controls.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Barra de progresso */
+  .progressContainer {
+    position: relative;
+    width: 100%;
+    height: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .progressBar {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .bufferBar {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+  
+  .bufferSegment {
+    position: absolute;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .bookmarkMarker {
+    position: absolute;
+    top: 0;
+    width: 4px;
+    height: 16px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+    z-index: 3;
+  }
+  
+  /* Controles inferiores */
+  .controlsBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .leftControls, .rightControls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .controlButton {
+    color: white !important;
+    padding: 4px 8px !important;
+    background-color: transparent !important;
+    border: none !important;
+    transition: background-color 0.2s ease !important;
+  }
+  
+  .controlButton:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  .timeDisplay {
+    color: white;
+    font-size: 14px;
+    margin-left: 8px;
+  }
+  
+  /* Título do vídeo */
+  .titleOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), transparent);
+    z-index: 15;
+  }
+  
+  .titleOverlay h3 {
+    color: white;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  /* Estilo para opção ativa no menu de velocidade */
+  .activeMenuItem {
+    color: var(--primary-color) !important;
+    font-weight: bold;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .controls {
+      padding: 12px;
+    }
+    
+    .leftControls, .rightControls {
+      gap: 4px;
+    }
+    
+    .controlButton {
+      padding: 2px 6px !important;
+      font-size: 18px !important;
+    }
+    
+    .timeDisplay {
+      font-size: 12px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .controls {
+      padding: 8px;
+    }
+    
+    .progressContainer {
+      height: 12px;
+      margin-bottom: 8px;
+    }
+    
+    .titleOverlay {
+      padding: 12px;
+    }
+    
+    .titleOverlay h3 {
+      font-size: 14px;
+    }
+    
+    /* Esconder alguns controles em telas muito pequenas */
+    .controlButton span {
+      display: none;
+    }
+  }
+  
+  /* Acessibilidade - preferência reduzida de movimento */
+  @media (prefers-reduced-motion: reduce) {
+    .controls,
+    .spinner {
+      transition: none;
+      animation: none;
+    }
+  }

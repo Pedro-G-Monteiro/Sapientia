@@ -1,0 +1,362 @@
+.assignmentContainer {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+  
+  .assignmentCard {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+  }
+  
+  /* Header do assignment */
+  .assignmentHeader {
+    margin-bottom: 16px;
+  }
+  
+  .assignmentTitle {
+    margin-bottom: 16px !important;
+  }
+  
+  .assignmentMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 16px;
+  }
+  
+  .dueDateContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .dueDateIcon {
+    color: var(--text-color-secondary);
+  }
+  
+  .lateBadge {
+    color: var(--error-color);
+    font-weight: 500;
+  }
+  
+  .pointsContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .pointsText {
+    font-weight: 500;
+    color: var(--text-color-secondary);
+  }
+  
+  /* Descrição do assignment */
+  .assignmentDescription {
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  
+  .assignmentDescription h1,
+  .assignmentDescription h2,
+  .assignmentDescription h3 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+    color: var(--text-color);
+  }
+  
+  .assignmentDescription p {
+    margin-bottom: 16px;
+    color: var(--text-color);
+  }
+  
+  .assignmentDescription ul,
+  .assignmentDescription ol {
+    padding-left: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .assignmentDescription li {
+    margin-bottom: 8px;
+  }
+  
+  /* Seção de recursos */
+  .resourcesSection {
+    margin-top: 32px;
+    margin-bottom: 24px;
+    background-color: var(--bg-color-secondary);
+    padding: 16px;
+    border-radius: 8px;
+  }
+  
+  .resourcesList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  .resourceItem {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  
+  .resourceItem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-color-light);
+  }
+  
+  .resourceIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-right: 16px;
+    color: var(--primary-color);
+  }
+  
+  .resourceInfo {
+    flex: 1;
+  }
+  
+  .resourceName {
+    font-weight: 500;
+    color: var(--text-color);
+  }
+  
+  .resourceMeta {
+    color: var(--text-color-secondary);
+    font-size: 0.9rem;
+    margin-top: 4px;
+  }
+  
+  .resourceDownload {
+    margin-left: auto;
+  }
+  
+  /* Formulário de envio */
+  .submissionFormContainer {
+    margin-top: 32px;
+  }
+  
+  .submissionTextarea {
+    width: 100%;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .uploader {
+    border-radius: 8px;
+  }
+  
+  .uploaderIcon {
+    font-size: 48px;
+    color: var(--primary-color);
+  }
+  
+  .uploaderText {
+    margin: 8px 0;
+    color: var(--text-color);
+  }
+  
+  .uploaderHint {
+    color: var(--text-color-secondary);
+    font-size: 0.9rem;
+  }
+  
+  .attachmentsList {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    background-color: var(--bg-color-secondary);
+    padding: 16px;
+    border-radius: 8px;
+  }
+  
+  .attachmentItem {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 12px;
+  }
+  
+  .attachmentIcon {
+    font-size: 20px;
+    margin-right: 16px;
+    color: var(--text-color-secondary);
+  }
+  
+  .attachmentName {
+    flex: 1;
+    font-weight: 500;
+    color: var(--text-color);
+  }
+  
+  .attachmentSize {
+    color: var(--text-color-secondary);
+    margin-right: 16px;
+    font-size: 0.9rem;
+  }
+  
+  .attachmentRemove {
+    color: var(--error-color);
+  }
+  
+  .submitActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  
+  .uploadProgress {
+    margin-top: 16px;
+  }
+  
+  /* Submissão pendente */
+  .pendingContainer {
+    padding: 16px;
+  }
+  
+  .submissionAlert {
+    margin-bottom: 24px;
+  }
+  
+  .submissionInfo {
+    margin-bottom: 24px;
+    color: var(--text-color-secondary);
+  }
+  
+  .submissionPreview {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .submissionText {
+    background-color: var(--bg-color-secondary);
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 12px;
+  }
+  
+  .submissionFiles {
+    margin-top: 24px;
+  }
+  
+  .submittedFile {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background-color: var(--bg-color-secondary);
+    border-radius: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .fileIcon {
+    margin-right: 12px;
+    color: var(--primary-color);
+  }
+  
+  /* Submissão avaliada */
+  .gradedContainer {
+    padding: 16px;
+  }
+  
+  .feedbackContainer {
+    margin-top: 24px;
+    margin-bottom: 24px;
+  }
+  
+  .feedbackContent {
+    background-color: var(--bg-color-secondary);
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    margin-top: 12px;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .assignmentContainer {
+      padding: 16px;
+    }
+    
+    .assignmentMeta {
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .submissionFiles, 
+    .submissionPreview, 
+    .feedbackContainer {
+      margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .submitActions {
+      flex-direction: column-reverse;
+      align-items: stretch;
+    }
+    
+    .submitActions button {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .assignmentContainer {
+      padding: 12px;
+    }
+    
+    .resourceItem {
+      flex-wrap: wrap;
+    }
+    
+    .resourceIcon {
+      margin-right: 12px;
+    }
+    
+    .resourceDownload {
+      margin-left: 0;
+      margin-top: 12px;
+      width: 100%;
+    }
+  }
+  
+  /* Modo escuro */
+  :global(.dark) .assignmentCard {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  :global(.dark) .resourceItem,
+  :global(.dark) .attachmentItem,
+  :global(.dark) .submittedFile {
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  :global(.dark) .submissionText,
+  :global(.dark) .feedbackContent {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Acessibilidade - menos movimento */
+  @media (prefers-reduced-motion: reduce) {
+    .resourceItem,
+    .attachmentItem {
+      transition: none;
+    }
+    
+    .resourceItem:hover {
+      transform: none;
+    }
+  }
