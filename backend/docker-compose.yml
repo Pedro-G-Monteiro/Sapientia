@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  # Banco de dados PostgreSQL para Auth Service
+  auth-db:
+    image: postgres:14-alpine
+    container_name: auth-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: openpg
+      POSTGRES_PASSWORD: openpgpwd
+      POSTGRES_DB: authdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - auth-db-data:/var/lib/postgresql/data
+    networks:
+      - sapientia-network
+
+  # Auth Service
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile.dev
+    container_name: auth-service
+    restart: unless-stopped
+    environment:
+      - PORT=3000
+      - NODE_ENV=development
+      - JWT_SECRET=sapientiasupersecretkey
+      - DATABASE_URL=postgresql://openpg:openpgpwd@auth-db:5432/authdb
+    ports:
+      - "3000:3000"
+    depends_on:
+      - auth-db
+    volumes:
+      - ./auth-service:/app
+      - /app/node_modules
+    networks:
+      - sapientia-network
+
+  # Organization Service
+  organization-service:
+    build:
+      context: ./organization-service
+      dockerfile: Dockerfile.dev
+    container_name: organization-service
+    restart: unless-stopped
+    environment:
+      - PORT=3001
+      - NODE_ENV=development
+      - JWT_SECRET=sapientiasupersecretkey
+      - DATABASE_URL=postgresql://openpg:openpgpwd@organization-db:5432/organizationdb
+      - AUTH_SERVICE_URL=http://auth-service:3000
+    ports:
+      - "3001:3001"
+    depends_on:
+      - organization-db
+      - auth-service
+    volumes:
+      - ./organization-service:/app
+      - /app/node_modules
+    networks:
+      - sapientia-network
+
+  # Banco de dados para Organization Service
+  organization-db:
+    image: postgres:14-alpine
+    container_name: organization-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: openpg
+      POSTGRES_PASSWORD: openpgpwd
+      POSTGRES_DB: organizationdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - organization-db-data:/var/lib/postgresql/data
+    networks:
+      - sapientia-network
+
+  # API Gateway (Traefik)
+  traefik:
+    image: traefik:v2.9
+    container_name: traefik
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik:/etc/traefik
+    networks:
+      - sapientia-network
+
+volumes:
+  auth-db-data:
+  organization-db-data:
+
+networks:
+  sapientia-network:
+    driver: bridge

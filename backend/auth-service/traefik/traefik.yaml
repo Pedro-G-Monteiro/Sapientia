@@ -1,0 +1,56 @@
+# traefik/traefik.yaml
+api:
+  dashboard: true
+  insecure: true
+
+entryPoints:
+  web:
+    address: ":80"
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
+  file:
+    directory: "/etc/traefik/dynamic"
+    watch: true
+
+# Configuração dinâmica para o Traefik
+# traefik/dynamic/routes.yaml
+http:
+  routers:
+    auth-service:
+      rule: "PathPrefix(`/api/v1/auth`) || PathPrefix(`/api/v1/me`)"
+      service: auth-service
+      middlewares:
+        - strip-auth-prefix
+
+    organization-service:
+      rule: "PathPrefix(`/api/v1/organizations`)"
+      service: organization-service
+      middlewares:
+        - strip-org-prefix
+
+  middlewares:
+    strip-auth-prefix:
+      stripPrefix:
+        prefixes:
+          - "/api/v1"
+        forceSlash: true
+
+    strip-org-prefix:
+      stripPrefix:
+        prefixes:
+          - "/api/v1"
+        forceSlash: true
+
+  services:
+    auth-service:
+      loadBalancer:
+        servers:
+          - url: "http://auth-service:3000"
+
+    organization-service:
+      loadBalancer:
+        servers:
+          - url: "http://organization-service:3001"
