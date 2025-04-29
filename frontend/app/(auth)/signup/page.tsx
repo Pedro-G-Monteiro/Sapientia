@@ -5,43 +5,65 @@ import { Typography } from "antd";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./page.module.css";
+import { benefits } from "./benefits";
 
 const { Title, Paragraph } = Typography;
 
-// Benefits of joining Sapientia
-const benefits = [
-  {
-    title: "Personalized Learning Paths",
-    description: "Customized curriculum tailored to your unique goals and learning style."
-  },
-  {
-    title: "Expert Instructors",
-    description: "Learn from industry professionals with real-world experience."
-  },
-  {
-    title: "Flexible Schedule",
-    description: "Study at your own pace with 24/7 access to all course materials."
-  },
-  {
-    title: "Interactive Exercises",
-    description: "Reinforce your knowledge through hands-on projects and exercises."
-  }
-];
+interface SignUpData {
+  first_name: string;
+  last_name: string;
+  username: string;
+  email: string;
+  password: string;
+}
 
 const SignUpPage = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [announcementMessage, setAnnouncementMessage] = useState("");
 
-  const handleSignUpSuccess = () => {
-    setIsLoading(true);
-    setAnnouncementMessage("Account created successfully. Redirecting to dashboard...");
-    console.log(announcementMessage);
+  const handleSignUpSuccess = async (userData: SignUpData) => {
+    try {
+      setIsLoading(true);
+      setAnnouncementMessage("Account created successfully. Authenticating...");
+      console.log("Attempting to authenticate with:", userData);
+      
+      // Realizar autenticação real com o backend
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: userData.email,
+          password: userData.password,
+        }),
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Authentication failed');
+      }
+      
+      const authData = await response.json();
+      
+      // Armazenar token JWT ou dados de sessão
+      localStorage.setItem('authToken', authData.token);
 
-    // Simulate authentication delay
-    setTimeout(() => {
+      setAnnouncementMessage("Authentication successful. Redirecting to dashboard...");
+      
+      // Redirecionar para o dashboard
       router.push("/dashboard");
-    }, 1000);
+    } catch (error) {
+      console.error("Error while performing authentication:", error);
+      setAnnouncementMessage("Error during authentication. Please try again.");
+      setIsLoading(false);
+      
+      // Redirecionar para a página de login após pequeno delay
+      setTimeout(() => {
+        router.push("/login");
+      }, 2000);
+    }
   };
 
   return (

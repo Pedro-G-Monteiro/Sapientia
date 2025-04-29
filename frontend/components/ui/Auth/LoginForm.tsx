@@ -5,12 +5,30 @@ import { Button, Checkbox, Divider, Form, Input, message, Typography } from 'ant
 import Link from 'next/link';
 import React, { useState } from 'react';
 import styles from './LoginForm.module.css';
+import { apiFetch } from '@/lib/api';
 
 const { Text } = Typography;
 
 interface LoginFormProps {
   onLoginSuccess: () => void;
   isLoading: boolean;
+}
+
+interface User {
+  user_id: number;
+  username: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+}
+
+interface LoginResponse {
+  status: string;
+  message: string;
+  data: {
+    user: User;
+    token: string;
+  };
 }
 
 interface LoginFormValues {
@@ -20,57 +38,39 @@ interface LoginFormValues {
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
-  const [form] = Form.useForm();
+  const [form] = Form.useForm<LoginFormValues>();
   const [formLoading, setFormLoading] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  // Email format validation function
   const validateEmail = (email: string) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   };
-  
-  // // Password strength checker
-  // const checkPasswordStrength = (password: string) => {
-  //   if (!password) return '';
-    
-  //   const hasLowerCase = /[a-z]/.test(password);
-  //   const hasUpperCase = /[A-Z]/.test(password);
-  //   const hasDigit = /\d/.test(password);
-  //   const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-  //   const isLongEnough = password.length >= 8;
-    
-  //   if (isLongEnough && hasLowerCase && hasUpperCase && hasDigit && hasSpecialChar) {
-  //     return 'strong';
-  //   } else if (isLongEnough && ((hasLowerCase && hasUpperCase) || (hasDigit && hasSpecialChar))) {
-  //     return 'medium';
-  //   } else {
-  //     return 'weak';
-  //   }
-  // };
 
   const handleSubmit = async (values: LoginFormValues) => {
     setFormLoading(true);
     try {
-      // Simulate API call with progress feedback
-      messageApi.loading('Authenticating...', 0);
-      
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
-      // For demo purposes
-      if (values.email === 'demo@example.com' && values.password === 'password') {
-        messageApi.destroy();
-        messageApi.success('Login successful!');
-        onLoginSuccess();
-      } else {
-        messageApi.destroy();
-        messageApi.error('Invalid email or password');
-      }
-    } catch (error) {
+      // Call login endpoint and unwrap data
+      const response = await apiFetch<LoginResponse>('/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: values.email,
+          password: values.password,
+        }),
+      });
+
+      messageApi.destroy();
+      messageApi.success(response.message || 'Login successful!');
+
+      // Store JWT for subsequent requests
+      localStorage.setItem('authToken', response.data.token);
+
+      onLoginSuccess();
+    } catch (error: any) {
       console.error('Login error:', error);
       messageApi.destroy();
-      messageApi.error('An error occurred during login');
+      messageApi.error(error.message || 'Invalid email or password');
     } finally {
       setFormLoading(false);
     }
@@ -78,10 +78,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
 
   const handleSocialLogin = (provider: string) => {
     setFormLoading(true);
-    
     messageApi.loading(`Connecting to ${provider}...`, 0);
-    
-    // Simulate API call for social login
     setTimeout(() => {
       messageApi.destroy();
       messageApi.success(`${provider} login successful!`);
@@ -89,14 +86,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
     }, 1000);
   };
 
-  // No demo credentials needed
-
   return (
     <div className={styles.loginWrapper}>
       {contextHolder}
-      
       <div className={styles.brandName}>Sapientia</div>
-           
       <Form
         form={form}
         name="login_form"
@@ -110,23 +103,23 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
           label="Email Address"
           rules={[
             { required: true, message: 'Please enter your email' },
-            { 
-              validator: (_, value) => 
-                !value || validateEmail(value) 
-                  ? Promise.resolve() 
-                  : Promise.reject(new Error('Please enter a valid email address'))
-            }
+            {
+              validator: (_, value) =>
+                !value || validateEmail(value)
+                  ? Promise.resolve()
+                  : Promise.reject(new Error('Please enter a valid email address')),
+            },
           ]}
         >
-          <Input 
+          <Input
             prefix={<MailOutlined className={styles.inputIcon} />}
-            placeholder="your.email@example.com" 
+            placeholder="your.email@example.com"
             size="large"
             className={styles.formInput}
             autoComplete="email"
           />
         </Form.Item>
-        
+
         <Form.Item
           name="password"
           label="Password"
@@ -137,26 +130,30 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
           }
           rules={[
             { required: true, message: 'Please enter your password' },
-            { min: 6, message: 'Password must be at least 6 characters' }
+            { min: 6, message: 'Password must be at least 6 characters' },
           ]}
         >
-          <Input.Password 
+          <Input.Password
             prefix={<LockOutlined className={styles.inputIcon} />}
-            placeholder="********" 
+            placeholder="********"
             size="large"
             className={styles.formInput}
             autoComplete="current-password"
-            visibilityToggle={{ 
-              visible: passwordVisible, 
-              onVisibleChange: setPasswordVisible 
+            visibilityToggle={{
+              visible: passwordVisible,
+              onVisibleChange: setPasswordVisible,
             }}
           />
         </Form.Item>
-        
-        <Form.Item className={styles.rememberMeContainer} name="remember" valuePropName="checked">
+
+        <Form.Item
+          className={styles.rememberMeContainer}
+          name="remember"
+          valuePropName="checked"
+        >
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
-        
+
         <Form.Item>
           <Button
             type="primary"
@@ -169,9 +166,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
             Sign in
           </Button>
         </Form.Item>
-        
-        <Divider plain className={styles.divider}>or</Divider>
-        
+
+        <Divider plain className={styles.divider}>
+          or
+        </Divider>
+
         <Button
           icon={<GoogleOutlined />}
           size="large"
@@ -183,7 +182,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
           Sign in with Google
         </Button>
       </Form>
-      
       <div className={styles.signupSection}>
         <Text className={styles.signupText}>New to Sapientia?</Text>
         <Link href="/signup" className={styles.signupLink}>

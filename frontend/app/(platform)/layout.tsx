@@ -1,18 +1,24 @@
-import "@ant-design/v5-patch-for-react-19";
-import { Metadata } from "next";
-import "../globals.css";
-import AppLayout from "@/components/ui/Layout/AppLayout";
+// app/(platform)/layout.tsx
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+import AppLayout from '@/components/ui/Layout/AppLayout'
 
-// Metadados da aplicação
-export const metadata: Metadata = {
-  title: "Sapientia",
-  description: "Expand your knowledge with Sapientia",
-};
+const API_URL = process.env.NEXT_PUBLIC_API_URL!
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return <AppLayout>{children}</AppLayout>;
+export default async function PlatformLayout({ children }: { children: React.ReactNode }) {
+  const token = (await cookies()).get('token')?.value
+  if (!token) {
+    redirect('/login')
+  }
+
+  const res = await fetch(`${API_URL}/me`, {
+    method: 'GET',
+    headers: { 'Authorization': `Bearer ${token}` },
+    cache: 'no-store',
+  })
+  if (!res.ok) {
+    redirect('/login')
+  }
+
+  return <AppLayout>{children}</AppLayout>
 }

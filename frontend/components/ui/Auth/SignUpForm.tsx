@@ -6,6 +6,7 @@ import {
   LockOutlined,
   MailOutlined,
   UserOutlined,
+  UserAddOutlined,
 } from '@ant-design/icons';
 import {
   Button,
@@ -17,108 +18,125 @@ import {
   Progress,
   Tooltip,
   Typography,
+  Row,
+  Col,
 } from 'antd';
 import Link from 'next/link';
 import type { ValidateErrorEntity } from 'rc-field-form/es/interface';
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './SignUpForm.module.css';
+import { apiFetch } from '@/lib/api';
 
 const { Title, Text } = Typography;
 
 interface SignUpFormProps {
-	onSignUpSuccess: () => void;
-	isLoading: boolean;
+  onSignUpSuccess: (userData: {
+    first_name: string;
+    last_name: string;
+    username: string;
+    email: string;
+    password: string;
+  }) => void;
+  isLoading: boolean;
 }
 
 interface SignUpFormValues {
-	fullName: string;
-	email: string;
-	password: string;
-	confirmPassword: string;
-	agreeTerms: boolean;
+  first_name: string;
+  last_name: string;
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  agreeTerms: boolean;
 }
 
 const SignUpForm: React.FC<SignUpFormProps> = ({
-	onSignUpSuccess,
-	isLoading,
+  onSignUpSuccess,
+  isLoading,
 }) => {
-	const [form] = Form.useForm();
-	const [formLoading, setFormLoading] = useState(false);
-	const [messageApi, contextHolder] = message.useMessage();
-	const [passwordVisible, setPasswordVisible] = useState(false);
-	const [passwordStrength, setPasswordStrength] = useState<string>('');
-	const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
+  const [form] = Form.useForm();
+  const [formLoading, setFormLoading] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState<string>('');
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
   const formStartRef = useRef<HTMLDivElement>(null);
 
-	// Email format validation function
-	const validateEmail = (email: string) => {
-		const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		return regex.test(email);
-	};
+  // Email format validation function
+  const validateEmail = (email: string) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
 
-	// Password strength checker
-	const checkPasswordStrength = (password: string) => {
-		if (!password) {
-			setPasswordStrength('');
-			return '';
-		}
+  // Username validation function
+  const validateUsername = (username: string) => {
+    const regex = /^[a-zA-Z0-9_]{3,20}$/;
+    return regex.test(username);
+  };
 
-		const hasLowerCase = /[a-z]/.test(password);
-		const hasUpperCase = /[A-Z]/.test(password);
-		const hasDigit = /\d/.test(password);
-		const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-		const isLongEnough = password.length >= 8;
+  // Password strength checker
+  const checkPasswordStrength = (password: string) => {
+    if (!password) {
+      setPasswordStrength('');
+      return '';
+    }
 
-		let strength = '';
-		if (
-			isLongEnough &&
-			hasLowerCase &&
-			hasUpperCase &&
-			hasDigit &&
-			hasSpecialChar
-		) {
-			strength = 'strong';
-		} else if (
-			isLongEnough &&
-			((hasLowerCase && hasUpperCase) || (hasDigit && hasSpecialChar))
-		) {
-			strength = 'medium';
-		} else {
-			strength = 'weak';
-		}
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasDigit = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const isLongEnough = password.length >= 8;
 
-		setPasswordStrength(strength);
-		return strength;
-	};
+    let strength = '';
+    if (
+      isLongEnough &&
+      hasLowerCase &&
+      hasUpperCase &&
+      hasDigit &&
+      hasSpecialChar
+    ) {
+      strength = 'strong';
+    } else if (
+      isLongEnough &&
+      ((hasLowerCase && hasUpperCase) || (hasDigit && hasSpecialChar))
+    ) {
+      strength = 'medium';
+    } else {
+      strength = 'weak';
+    }
 
-	// Get progress based on password strength
-	const getPasswordProgress = () => {
-		switch (passwordStrength) {
-			case 'weak':
-				return 33;
-			case 'medium':
-				return 66;
-			case 'strong':
-				return 100;
-			default:
-				return 0;
-		}
-	};
+    setPasswordStrength(strength);
+    return strength;
+  };
 
-	// Get progress status and color based on password strength
-	const getProgressStatus = () => {
-		switch (passwordStrength) {
-			case 'weak':
-				return { status: 'exception' as const, color: '#e60b0b' };
-			case 'medium':
-				return { status: 'active' as const, color: '#d48806' };
-			case 'strong':
-				return { status: 'success' as const, color: '#389e0d' };
-			default:
-				return { status: 'normal' as const, color: '' };
-		}
-	};
+  // Get progress based on password strength
+  const getPasswordProgress = () => {
+    switch (passwordStrength) {
+      case 'weak':
+        return 33;
+      case 'medium':
+        return 66;
+      case 'strong':
+        return 100;
+      default:
+        return 0;
+    }
+  };
+
+  // Get progress status and color based on password strength
+  const getProgressStatus = () => {
+    switch (passwordStrength) {
+      case 'weak':
+        return { status: 'exception' as const, color: '#e60b0b' };
+      case 'medium':
+        return { status: 'active' as const, color: '#d48806' };
+      case 'strong':
+        return { status: 'success' as const, color: '#389e0d' };
+      default:
+        return { status: 'normal' as const, color: '' };
+    }
+  };
 
   // Focus on first error when form errors occur
   useEffect(() => {
@@ -130,30 +148,42 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
     }
   }, [formErrors]);
 
-	const handleSubmit = async (values: SignUpFormValues) => {
-		setFormLoading(true);
-    console.log('Form values:', values);
+  const handleSubmit = async (values: SignUpFormValues) => {
+    setFormLoading(true);
     setFormErrors({});
     
-		try {
-			// Simulate API call with progress feedback
-			messageApi.loading('Creating your account...', 0);
+    try {
+      // Simulate API call with progress feedback
+      await apiFetch<null>('/auth/register', {
+        method: 'POST',
+        body: JSON.stringify({
+          first_name: values.first_name,
+          last_name: values.last_name,
+          username: values.username,
+          email: values.email,
+          password: values.password,
+        }),
+      });
 
-			await new Promise((resolve) => setTimeout(resolve, 1200));
-
-			// For demo purposes
-			messageApi.destroy();
-			messageApi.success('Account created successfully!');
-			onSignUpSuccess();
-		} catch (error) {
-			console.error('SignUp error:', error);
-			messageApi.destroy();
-			messageApi.error('An error occurred during sign up');
-      setFormErrors({ form: 'An error occurred during sign up' });
-		} finally {
-			setFormLoading(false);
-		}
-	};
+      messageApi.destroy();
+      messageApi.success('Account created successfully!');
+      onSignUpSuccess({
+        first_name: values.first_name,
+        last_name: values.last_name,
+        username: values.username,
+        email: values.email,
+        password: values.password
+      });
+    } catch (error: any) {
+      console.error('SignUp error:', error);
+      messageApi.destroy();
+      const errorMsg = error.message || 'Failed to create account.';
+      messageApi.error(errorMsg);
+      setFormErrors({ form: errorMsg });
+    } finally {
+      setFormLoading(false);
+    }
+  };
 
   const handleFormFinishFailed = ({ errorFields }: ValidateErrorEntity<SignUpFormValues>) => {
     const errors: Record<string, string> = {};
@@ -165,62 +195,132 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
     setFormErrors(errors);
   };
 
-	const handleSocialSignUp = (provider: string) => {
-		setFormLoading(true);
+  const handleSocialSignUp = (provider: string) => {
+    setFormLoading(true);
 
-		messageApi.loading(`Connecting to ${provider}...`, 0);
+    messageApi.loading(`Connecting to ${provider}...`, 0);
 
-		// Simulate API call for social login
-		setTimeout(() => {
-			messageApi.destroy();
-			messageApi.success(`${provider} account created successfully!`);
-			onSignUpSuccess();
-		}, 1000);
-	};
+    setTimeout(() => {
+      messageApi.destroy();
+      messageApi.success(`${provider} account created successfully!`);
+      onSignUpSuccess({
+        first_name: 'John',
+        last_name: 'Doe',
+        username: 'johndoe',
+        email: '',
+        password: ''
+      });
+    }, 1000);
+  };
 
-	return (
-		<div className={styles.signupWrapper} ref={formStartRef}>
-			{contextHolder}
+  return (
+    <div className={styles.signupWrapper} ref={formStartRef}>
+      {contextHolder}
       
-			<Form
-				form={form}
-				name="signup_form"
-				layout="vertical"
-				initialValues={{ agreeTerms: false }}
-				onFinish={handleSubmit}
+      <Form
+        form={form}
+        name="signup_form"
+        layout="vertical"
+        initialValues={{ agreeTerms: false }}
+        onFinish={handleSubmit}
         onFinishFailed={handleFormFinishFailed}
-				className={styles.signupForm}
+        className={styles.signupForm}
         aria-labelledby="form-title"
         role="form"
-			>
+      >
         <div id="signup-form-main" role="region" aria-labelledby="form-title" className={styles.formMain}>
           <div className={styles.formHeader}>
             <Title level={2} id="form-title" className={styles.formTitle}>Create Account</Title>
             <div className={styles.brandName} role="banner">Sapientia</div>
           </div>
 
+          <Row gutter={16}>
+            <Col xs={24} sm={12}>
+              <Form.Item
+                name="first_name"
+                label={<label htmlFor="first_name">First Name</label>}
+                rules={[
+                  { required: true, message: 'Please enter your first name' },
+                  { min: 2, message: 'First name must be at least 2 characters' },
+                ]}
+              >
+                <Input
+                  prefix={<UserOutlined className={styles.inputIcon} aria-hidden="true" />}
+                  placeholder="First name"
+                  size="large"
+                  className={styles.formInput}
+                  autoComplete="given-name"
+                  id="first_name"
+                  aria-required="true"
+                  aria-invalid={formErrors.first_name ? "true" : "false"}
+                  aria-describedby={formErrors.first_name ? "first_name-error" : undefined}
+                />
+                {formErrors.first_name && (
+                  <div id="first_name-error" className={styles.errorMessage} role="alert">
+                    {formErrors.first_name}
+                  </div>
+                )}
+              </Form.Item>
+            </Col>
+            <Col xs={24} sm={12}>
+              <Form.Item
+                name="last_name"
+                label={<label htmlFor="last_name">Last Name</label>}
+                rules={[
+                  { required: true, message: 'Please enter your last name' },
+                  { min: 2, message: 'Last name must be at least 2 characters' },
+                ]}
+              >
+                <Input
+                  prefix={<UserOutlined className={styles.inputIcon} aria-hidden="true" />}
+                  placeholder="Last name"
+                  size="large"
+                  className={styles.formInput}
+                  autoComplete="family-name"
+                  id="last_name"
+                  aria-required="true"
+                  aria-invalid={formErrors.last_name ? "true" : "false"}
+                  aria-describedby={formErrors.last_name ? "last_name-error" : undefined}
+                />
+                {formErrors.last_name && (
+                  <div id="last_name-error" className={styles.errorMessage} role="alert">
+                    {formErrors.last_name}
+                  </div>
+                )}
+              </Form.Item>
+            </Col>
+          </Row>
+
           <Form.Item
-            name="fullName"
-            label={<label htmlFor="fullName">Full Name</label>}
+            name="username"
+            label={<label htmlFor="username">Username</label>}
             rules={[
-              { required: true, message: 'Please enter your full name' },
-              { min: 2, message: 'Name must be at least 2 characters' },
+              { required: true, message: 'Please enter a username' },
+              { min: 3, message: 'Username must be at least 3 characters' },
+              {
+                validator: (_, value) =>
+                  !value || validateUsername(value)
+                    ? Promise.resolve()
+                    : Promise.reject(
+                        new Error('Username must be 3-20 characters and can only contain letters, numbers, and underscores')
+                      ),
+              },
             ]}
           >
             <Input
-              prefix={<UserOutlined className={styles.inputIcon} aria-hidden="true" />}
-              placeholder="Your full name"
+              prefix={<UserAddOutlined className={styles.inputIcon} aria-hidden="true" />}
+              placeholder="Choose a username"
               size="large"
               className={styles.formInput}
-              autoComplete="name"
-              id="fullName"
+              autoComplete="username"
+              id="username"
               aria-required="true"
-              aria-invalid={formErrors.fullName ? "true" : "false"}
-              aria-describedby={formErrors.fullName ? "fullName-error" : undefined}
+              aria-invalid={formErrors.username ? "true" : "false"}
+              aria-describedby={formErrors.username ? "username-error" : undefined}
             />
-            {formErrors.fullName && (
-              <div id="fullName-error" className={styles.errorMessage} role="alert">
-                {formErrors.fullName}
+            {formErrors.username && (
+              <div id="username-error" className={styles.errorMessage} role="alert">
+                {formErrors.username}
               </div>
             )}
           </Form.Item>
@@ -446,16 +546,16 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
             Sign up with Google
           </Button>
         </div>
-			</Form>
+      </Form>
 
-			<div className={styles.loginSection}>
-				<Text className={styles.loginText}>Already have an account?</Text>
-				<Link href="/login" className={styles.loginLink}>
-					Sign in
-				</Link>
-			</div>
-		</div>
-	);
+      <div className={styles.loginSection}>
+        <Text className={styles.loginText}>Already have an account?</Text>
+        <Link href="/login" className={styles.loginLink}>
+          Sign in
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 export default SignUpForm;

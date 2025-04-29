@@ -1,31 +1,37 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+// next.config.ts
+import { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
   reactStrictMode: true,
+
   images: {
-    domains: ['localhost'], // Adicione aqui o domínio da sua API para imagens
+    domains: ['localhost'], 
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: '**', // Restrinja conforme necessário em produção
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/uploads/**',
       },
     ],
   },
-  // Configuração para permitir API routes
-  async headers() {
+
+  // Proxy client calls at /api/* to your auth-service
+  async rewrites() {
     return [
       {
         source: '/api/:path*',
-        headers: [
-          { key: 'Access-Control-Allow-Credentials', value: 'true' },
-          { key: 'Access-Control-Allow-Origin', value: '*' },
-          { key: 'Access-Control-Allow-Methods', value: 'GET,DELETE,PATCH,POST,PUT' },
-          { key: 'Access-Control-Allow-Headers', value: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization' },
-        ],
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`,
       },
-    ];
+    ]
   },
-  // Configuração para módulos externos que precisam ser transpilados
-  transpilePackages: ['antd', '@ant-design/icons'],
-};
 
-module.exports = nextConfig;
+  transpilePackages: ['antd', '@ant-design/icons'],
+
+  // so you can still read it in client code if you ever need it
+  env: {
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+  },
+}
+
+export default nextConfig

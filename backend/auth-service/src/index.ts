@@ -4,11 +4,17 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes';
 import meRoutes from './routes/meRoutes';
 import authMiddleware from './middleware/authMiddleware';
+import fastifyCors from '@fastify/cors';
 
 // Env variables
 dotenv.config();
 
 const app = Fastify({ logger: true });
+
+app.register(fastifyCors, {
+  origin: process.env.ALLOWED_ORIGIN || '*',
+  credentials: true,
+})
 
 // JWT Plugin configuration
 app.register(fastifyJwt, {

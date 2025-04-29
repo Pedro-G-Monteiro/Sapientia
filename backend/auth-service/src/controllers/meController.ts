@@ -12,7 +12,7 @@ export const getMeController = async (
     if (!request.auth || !request.auth.user) {
       return reply.status(401).send({
         status: 'error',
-        message: 'Usuário não autenticado'
+        message: 'User not authenticated',
       });
     }
 
@@ -39,8 +39,8 @@ export const getMeController = async (
     request.log.error(error);
     return reply.status(500).send({
       status: 'error',
-      message: 'Erro interno do servidor',
-      error: error instanceof Error ? error.message : 'Erro desconhecido'
+      message: 'Internal server error',
+      error: error instanceof Error ? error.message : 'Unknown error',
     });
   }
 };
