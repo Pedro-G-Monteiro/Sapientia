@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Banco de dados PostgreSQL para Auth Service
   auth-db:
@@ -51,53 +49,53 @@ services:
       start_period: 10s
 
   # Organization Service
-  organization-service:
-    build:
-      context: ./organization-service
-      dockerfile: Dockerfile.dev
-    container_name: organization-service
-    restart: unless-stopped
-    environment:
-      - PORT=3001
-      - NODE_ENV=${NODE_ENV}
-      - JWT_SECRET=${JWT_SECRET}
-      - DATABASE_URL=postgresql://${ORG_DB_USER}:${ORG_DB_PASSWORD}@organization-db:5432/${ORG_DB_NAME}
-      - AUTH_SERVICE_URL=http://auth-service:${PORT}
-    ports:
-      - "3001:3001"
-    depends_on:
-      - organization-db
-      - auth-service
-    volumes:
-      - ./organization-service:/app
-      - /app/node_modules
-    networks:
-      - sapientia-network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.organization.rule=PathPrefix(`/api/v1/organizations`)"
-      - "traefik.http.services.organization.loadbalancer.server.port=3001"
+  # organization-service:
+  #   build:
+  #     context: ./organization-service
+  #     dockerfile: Dockerfile.dev
+  #   container_name: organization-service
+  #   restart: unless-stopped
+  #   environment:
+  #     - PORT=3001
+  #     - NODE_ENV=${NODE_ENV}
+  #     - JWT_SECRET=${JWT_SECRET}
+  #     - DATABASE_URL=postgresql://${ORG_DB_USER}:${ORG_DB_PASSWORD}@organization-db:5432/${ORG_DB_NAME}
+  #     - AUTH_SERVICE_URL=http://auth-service:${PORT}
+  #   ports:
+  #     - "3001:3001"
+  #   depends_on:
+  #     - organization-db
+  #     - auth-service
+  #   volumes:
+  #     - ./organization-service:/app
+  #     - /app/node_modules
+  #   networks:
+  #     - sapientia-network
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.organization.rule=PathPrefix(`/api/v1/organizations`)"
+  #     - "traefik.http.services.organization.loadbalancer.server.port=3001"
 
-  # Banco de dados para Organization Service
-  organization-db:
-    image: postgres:14-alpine
-    container_name: organization-db
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: ${ORG_DB_USER}
-      POSTGRES_PASSWORD: ${ORG_DB_PASSWORD}
-      POSTGRES_DB: ${ORG_DB_NAME}
-    ports:
-      - "${ORG_DB_PORT}:5432"
-    volumes:
-      - organization-db-data:/var/lib/postgresql/data
-    networks:
-      - sapientia-network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${ORG_DB_USER}"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+  # # Banco de dados para Organization Service
+  # organization-db:
+    # image: postgres:14-alpine
+    # container_name: organization-db
+    # restart: unless-stopped
+    # environment:
+    #   POSTGRES_USER: ${ORG_DB_USER}
+    #   POSTGRES_PASSWORD: ${ORG_DB_PASSWORD}
+    #   POSTGRES_DB: ${ORG_DB_NAME}
+    # ports:
+    #   - "${ORG_DB_PORT}:5432"
+    # volumes:
+    #   - organization-db-data:/var/lib/postgresql/data
+    # networks:
+    #   - sapientia-network
+    # healthcheck:
+    #   test: ["CMD-SHELL", "pg_isready -U ${ORG_DB_USER}"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
 
   # API Gateway (Traefik)
   traefik:
@@ -121,7 +119,7 @@ services:
 
 volumes:
   auth-db-data:
-  organization-db-data:
+  # organization-db-data:
 
 networks:
   sapientia-network:

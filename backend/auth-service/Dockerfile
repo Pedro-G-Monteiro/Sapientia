@@ -26,6 +26,10 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/prisma ./prisma
 
+# Script de entrypoint
+COPY scripts/entrypoint.sh ./entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Expor a porta
 EXPOSE 3000
 
