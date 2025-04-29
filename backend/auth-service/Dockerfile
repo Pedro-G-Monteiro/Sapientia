@@ -28,7 +28,7 @@ COPY --from=builder /app/prisma ./prisma
 
 # Script de entrypoint
 COPY scripts/entrypoint.sh ./entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN chmod +x ./entrypoint.sh
 
 # Expor a porta
 EXPOSE 3000
