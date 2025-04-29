@@ -11,10 +11,22 @@ dotenv.config();
 
 const app = Fastify({ logger: true });
 
+const FRONTEND_ORIGINS = [
+  'http://localhost:3000', // Local development
+];
+
 app.register(fastifyCors, {
-  origin: process.env.ALLOWED_ORIGIN || '*',
+  origin: (origin, cb) => {
+    // `origin` will be undefined for server‐to‐server calls (Postman, curl), so allow those too
+    if (!origin || FRONTEND_ORIGINS.includes(origin)) {
+      cb(null, true);
+    } else {
+      cb(new Error(`Origin ${origin} not allowed by CORS`), false);
+    }
+  },
+  // must be true if you want to send cookies or Authorization headers
   credentials: true,
-})
+});
 
 // JWT Plugin configuration
 app.register(fastifyJwt, {
