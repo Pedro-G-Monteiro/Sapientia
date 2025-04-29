@@ -28,8 +28,8 @@ app.get('/', async () => {
 });
 
 // Start server
-type StartFn = () => Promise<void>;
-const start: StartFn = async () => {
+type StartServer = () => Promise<void>;
+const start: StartServer = async () => {
   try {
     await app.listen({ port: Number(process.env.PORT) || 3000, host: '0.0.0.0' });
     app.log.info(`Server running in http://localhost:${process.env.PORT || 3000}`);
