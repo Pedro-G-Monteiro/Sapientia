@@ -15,7 +15,7 @@ services:
     networks:
       - sapientia-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${AUTH_DB_USER}"]
+      test: ["CMD-SHELL", "pg_isready -U ${AUTH_DB_USER} -d ${AUTH_DB_NAME}" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -25,6 +25,8 @@ services:
     image: ${AUTH_SERVICE_IMAGE}
     container_name: auth-service
     restart: unless-stopped
+    entrypoint: ["/app/entrypoint.sh"]
+    command: ["node", "dist/index.js"]
     environment:
       - PORT=${PORT}
       - NODE_ENV=${NODE_ENV}
