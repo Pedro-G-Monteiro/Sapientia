@@ -1,11 +1,20 @@
-'use client';
+"use client";
 
-import { GoogleOutlined, LockOutlined, MailOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Divider, Form, Input, message, Typography } from 'antd';
-import Link from 'next/link';
-import React, { useState } from 'react';
-import styles from './LoginForm.module.css';
-import { apiFetch } from '@/lib/api';
+import { GoogleOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
+import {
+  Button,
+  Checkbox,
+  Divider,
+  Form,
+  Input,
+  message,
+  Typography,
+} from "antd";
+import Link from "next/link";
+import React, { useState } from "react";
+import styles from "./LoginForm.module.css";
+import { setAuthCookie } from "@/lib/auth-utils";
+import { apiFetch } from "@/lib/api";
 
 const { Text } = Typography;
 
@@ -52,25 +61,28 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
     setFormLoading(true);
     try {
       // Call login endpoint and unwrap data
-      const response = await apiFetch<LoginResponse>('/auth/login', {
-        method: 'POST',
+      const response = await apiFetch<LoginResponse>("/auth/login", {
+        method: "POST",
         body: JSON.stringify({
           email: values.email,
           password: values.password,
         }),
       });
 
+      console.log("Login response:", response);
       messageApi.destroy();
-      messageApi.success(response.message || 'Login successful!');
+      messageApi.success(response.message || "Login successful!");
 
-      // Store JWT for subsequent requests
-      localStorage.setItem('authToken', response.data.token);
+      // Store JWT in cookie for subsequent requests (more secure than localStorage)
+      // @ts-expect-error
+      setAuthCookie(response.data.token);
 
+      // Call onLoginSuccess to redirect to dashboard
       onLoginSuccess();
-    } catch (error: any) {
-      console.error('Login error:', error);
+    } catch (err: any) {
+      console.error("Login error:", err);
       messageApi.destroy();
-      messageApi.error(error.message || 'Invalid email or password');
+      messageApi.error(err.message || "Invalid email or password");
     } finally {
       setFormLoading(false);
     }
@@ -102,12 +114,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
           name="email"
           label="Email Address"
           rules={[
-            { required: true, message: 'Please enter your email' },
+            { required: true, message: "Please enter your email" },
             {
               validator: (_, value) =>
                 !value || validateEmail(value)
                   ? Promise.resolve()
-                  : Promise.reject(new Error('Please enter a valid email address')),
+                  : Promise.reject(
+                      new Error("Please enter a valid email address")
+                    ),
             },
           ]}
         >
@@ -129,8 +143,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
             </Link>
           }
           rules={[
-            { required: true, message: 'Please enter your password' },
-            { min: 6, message: 'Password must be at least 6 characters' },
+            { required: true, message: "Please enter your password" },
+            { min: 6, message: "Password must be at least 6 characters" },
           ]}
         >
           <Input.Password
@@ -175,7 +189,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isLoading }) => {
           icon={<GoogleOutlined />}
           size="large"
           block
-          onClick={() => handleSocialLogin('Google')}
+          onClick={() => handleSocialLogin("Google")}
           loading={formLoading || isLoading}
           className={styles.googleButton}
         >

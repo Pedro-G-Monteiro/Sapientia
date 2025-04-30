@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import { Typography } from "antd";
 import { slideContent } from "./slideContent";
+import { isAuthenticated } from "@/lib/auth-utils";
 
 const { Title, Paragraph } = Typography;
 
@@ -16,6 +17,13 @@ const LoginPage = () => {
   // For carousel/slider dots
   const [activeSlide, setActiveSlide] = useState(0);
   const totalSlides = slideContent.length;
+
+  // Check if user is already authenticated
+  useEffect(() => {
+    if (isAuthenticated()) {
+      router.push("/dashboard");
+    }
+  }, [router]);
 
   // Auto-rotation for slides
   useEffect(() => {
@@ -28,10 +36,7 @@ const LoginPage = () => {
 
   const handleLoginSuccess = () => {
     setIsLoading(true);
-
-    if(localStorage.getItem("authToken")) {
-      router.push("/dashboard");
-    }
+    router.push("/dashboard");
   };
 
   return (

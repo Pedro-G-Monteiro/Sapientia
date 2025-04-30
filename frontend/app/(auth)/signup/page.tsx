@@ -25,44 +25,29 @@ const SignUpPage = () => {
   const handleSignUpSuccess = async (userData: SignUpData) => {
     try {
       setIsLoading(true);
-      setAnnouncementMessage("Account created successfully. Authenticating...");
-      console.log("Attempting to authenticate with:", userData);
+      setAnnouncementMessage("Account creation in progress...");
       
-      // Realizar autenticação real com o backend
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: userData.email,
-          password: userData.password,
-        }),
-      });
-      
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Authentication failed');
+      // Se a senha estiver vazia, provavelmente é um login social que já está autenticado
+      if (!userData.password) {
+        setAnnouncementMessage("Account already authenticated. Redirecting to dashboard...");
+        router.push("/dashboard");
+        return;
       }
       
-      const authData = await response.json();
+      // Importar registerAndLogin dinamicamente para evitar problemas de dependência circular
+      const { registerAndLogin } = await import('@/lib/auth-utils');
       
-      // Armazenar token JWT ou dados de sessão
-      localStorage.setItem('authToken', authData.token);
+      // Registrar e fazer login em uma única operação
+      await registerAndLogin(userData);
 
-      setAnnouncementMessage("Authentication successful. Redirecting to dashboard...");
+      setAnnouncementMessage("Account created successfully. Redirecting to dashboard...");
       
       // Redirecionar para o dashboard
       router.push("/dashboard");
-    } catch (error) {
-      console.error("Error while performing authentication:", error);
-      setAnnouncementMessage("Error during authentication. Please try again.");
+    } catch (error: any) {
+      console.error("Error while authenticating:", error);
+      setAnnouncementMessage("Error creating account. Please try again.");
       setIsLoading(false);
-      
-      // Redirecionar para a página de login após pequeno delay
-      setTimeout(() => {
-        router.push("/login");
-      }, 2000);
     }
   };
 

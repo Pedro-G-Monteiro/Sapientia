@@ -20,8 +20,8 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`,
+        source: '/api/v1/:path*',
+        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/:path*`,
       },
     ]
   },
@@ -30,7 +30,7 @@ const nextConfig: NextConfig = {
 
   // so you can still read it in client code if you ever need it
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_BASE_URL,
   },
 }
 
