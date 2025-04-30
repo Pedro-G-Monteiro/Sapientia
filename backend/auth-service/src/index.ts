@@ -12,7 +12,7 @@ dotenv.config();
 const app = Fastify({ logger: true });
 
 const FRONTEND_ORIGINS = [
-  'http://localhost:3000', // Local development
+  'http://localhost:3001', // Local development
 ];
 
 app.register(fastifyCors, {
