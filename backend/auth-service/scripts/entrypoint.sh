@@ -1,10 +1,13 @@
 #!/bin/sh
-set -e
 
-# Executa as migrações do Prisma
-echo "Running database migrations..."
+echo "Waiting for the database to be available..."
+until npx prisma db wait; do
+  echo "Database is not ready yet. Retrying in 1 second..."
+  sleep 1
+done
+
+echo "Applying database migrations..."
 npx prisma migrate deploy
 
-# Inicia a aplicação
-echo "Starting the application..."
+echo "Migrations applied successfully."
 exec "$@"

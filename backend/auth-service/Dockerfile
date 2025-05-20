@@ -36,5 +36,7 @@ EXPOSE 3000
 # Definir variáveis de ambiente
 ENV NODE_ENV=production
 
+ENTRYPOINT [ "./entrypoint.sh" ]
+
 # Comando para iniciar a aplicação
 CMD ["node", "dist/index.js"]
