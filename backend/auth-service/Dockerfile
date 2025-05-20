@@ -36,6 +36,9 @@ EXPOSE 3000
 # Definir variáveis de ambiente
 ENV NODE_ENV=production
 
+# Instala o cliente PostgreSQL para usar pg_isready
+RUN apk add --no-cache postgresql-client
+
 ENTRYPOINT [ "./entrypoint.sh" ]
 
 # Comando para iniciar a aplicação

@@ -16,6 +16,9 @@ COPY entrypoint-dev.sh ./entrypoint-dev.sh
 
 RUN chmod +x ./entrypoint-dev.sh
 
+# Instala o cliente PostgreSQL para usar pg_isready
+RUN apk add --no-cache postgresql-client
+
 ENTRYPOINT ["./entrypoint-dev.sh"]
 
 # Expor a porta
