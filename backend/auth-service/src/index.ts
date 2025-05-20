@@ -1,10 +1,11 @@
-import Fastify from 'fastify';
-import fastifyJwt from '@fastify/jwt';
-import dotenv from 'dotenv';
-import authRoutes from './routes/authRoutes';
-import meRoutes from './routes/meRoutes';
-import authMiddleware from './middleware/authMiddleware';
 import fastifyCors from '@fastify/cors';
+import fastifyJwt from '@fastify/jwt';
+import fastifySwagger from '@fastify/swagger';
+import fastifySwaggerUi from '@fastify/swagger-ui';
+import dotenv from 'dotenv';
+import Fastify from 'fastify';
+import authMiddleware from './middleware/authMiddleware';
+import authRoutes from './routes/authRoutes';
 
 // Env variables
 dotenv.config();
@@ -12,7 +13,7 @@ dotenv.config();
 const app = Fastify({ logger: true });
 
 const FRONTEND_ORIGINS = [
-  'http://localhost:3001', // Local development
+  process.env.ALLOWED_ORIGIN, // Local development
 ];
 
 app.register(fastifyCors, {
@@ -36,9 +37,30 @@ app.register(fastifyJwt, {
 // Middleware for authentication
 app.register(authMiddleware);
 
+app.register(fastifySwagger, {
+  swagger: {
+    info: {
+      title: 'Auth Service API',
+      description: 'Auth-related endpoints and user authentication documentation',
+      version: '1.0.0',
+    },
+    host: `localhost:${process.env.PORT || 3000}`,
+    schemes: ['http'],
+    consumes: ['application/json'],
+    produces: ['application/json'],
+  },
+});
+
+app.register(fastifySwaggerUi, {
+  routePrefix: '/docs',
+  uiConfig: {
+    docExpansion: 'full',
+    deepLinking: false,
+  },
+});
+
 // Routes
 app.register(authRoutes, { prefix: 'api/v1/auth' });
-app.register(meRoutes, { prefix: '/api/v1' });
 
 // Health check route
 app.get('/', async () => {
@@ -50,7 +72,7 @@ type StartServer = () => Promise<void>;
 const start: StartServer = async () => {
   try {
     await app.listen({ port: Number(process.env.PORT) || 3000, host: '0.0.0.0' });
-    app.log.info(`🚀 Server running in http://localhost:${process.env.PORT || 3000}!`);
+    app.log.info(`Server running in http://localhost:${process.env.PORT || 3000} !`);
   } catch (err) {
     app.log.error(err);
     process.exit(1);

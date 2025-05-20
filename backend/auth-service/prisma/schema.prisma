@@ -26,7 +26,7 @@ model User {
   date_joined         DateTime @default(now())
   last_login          DateTime?
   is_active           Boolean  @default(true)
-  is_admin            Boolean  @default(false)
+  roles               UserRole[]
 
   organization        Organization? @relation(fields: [organization_id], references: [organization_id])
 
@@ -49,4 +49,24 @@ model Organization {
   users           User[]
 
   @@map("organizations")
+}
+
+model Role {
+  role_id         Int @id @default(autoincrement())
+  name            String @unique
+  label           String? // e.g., "Administrator", "Editor", etc.
+  users           UserRole[]
+
+  @@map("roles")
+}
+
+model UserRole {
+  user_id Int
+  role_id Int
+
+  user User @relation(fields: [user_id], references: [user_id])
+  role Role @relation(fields: [role_id], references: [role_id])
+
+  @@id([user_id, role_id])
+  @@map("user_roles")
 }
