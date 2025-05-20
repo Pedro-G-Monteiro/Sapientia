@@ -12,6 +12,12 @@ COPY . .
 # Gerar o Prisma Client
 RUN npx prisma generate
 
+COPY entrypoint-dev.sh ./entrypoint-dev.sh
+
+RUN chmod +x ./entrypoint-dev.sh
+
+ENTRYPOINT ["./entrypoint-dev.sh"]
+
 # Expor a porta
 EXPOSE 3000
 
