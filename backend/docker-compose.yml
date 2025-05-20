@@ -119,6 +119,18 @@ services:
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
 
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_POLL_INTERVAL=30 # Verifica novas imagens a cada 30 segundos
+    networks:
+      - sapientia-network
+
 volumes:
   auth-db-data:
   # organization-db-data:

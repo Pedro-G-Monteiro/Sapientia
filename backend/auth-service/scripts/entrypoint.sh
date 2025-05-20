@@ -7,7 +7,10 @@ until npx prisma db wait; do
 done
 
 echo "Applying database migrations..."
-npx prisma migrate deploy
+npx prisma migrate deploy || {
+  echo "Migration failed. Exiting."
+  exit 1
+}
 
 echo "Migrations applied successfully."
 exec "$@"

@@ -7,7 +7,10 @@ until npx prisma db wait; do
 done
 
 echo "Applying dev migrations..."
-npx prisma migrate dev --name init || echo "Migration might already be applied"
+npx prisma migrate dev --skip-seed || {
+  echo "Migration failed. Exiting..."
+  exit 1
+}
 
 echo "Starting development server..."
 exec npm run dev
