@@ -1,0 +1,28 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Instalar dependências
+COPY package*.json ./
+RUN npm install
+
+# Copiar o código fonte
+COPY . .
+
+# Gerar o Prisma Client
+RUN npx prisma generate
+
+COPY entrypoint-dev.sh ./entrypoint-dev.sh
+
+RUN chmod +x ./entrypoint-dev.sh
+
+# Instala o cliente PostgreSQL para usar pg_isready
+RUN apk add --no-cache postgresql-client
+
+ENTRYPOINT ["./entrypoint-dev.sh"]
+
+# Expor a porta
+EXPOSE 3000
+
+# Comando para iniciar em modo de desenvolvimento
+CMD ["npm", "run", "dev"]

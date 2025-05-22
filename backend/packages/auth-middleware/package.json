@@ -1,0 +1,18 @@
+{
+  "name": "@sapientia/auth-middleware",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "exports": {
+    ".": {
+      "import": "./index.ts"
+    }
+  },
+  "peerDependencies": {
+    "fastify": "^4.0.0",
+    "fastify-plugin": "^4.0.0",
+    "fastify-jwt": "^6.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

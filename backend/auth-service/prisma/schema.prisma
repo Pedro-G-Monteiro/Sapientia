@@ -29,27 +29,9 @@ model User {
   is_active           Boolean  @default(true)
   roles               UserRole[]
 
-  organization        Organization? @relation(fields: [organization_id], references: [organization_id])
+  organization        Int?
 
   @@map("users")
-}
-
-model Organization {
-  organization_id Int     @id @default(autoincrement())
-  name            String
-  type            String
-  description     String?
-  logo_url        String?
-  website         String?
-  address         String?
-  phone           String?
-  email           String?
-  created_at      DateTime @default(now())
-  is_active       Boolean  @default(true)
-
-  users           User[]
-
-  @@map("organizations")
 }
 
 model Role {
